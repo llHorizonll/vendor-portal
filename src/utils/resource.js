@@ -20,8 +20,8 @@ export const resource = [
     icon: "receipt",
   },
   {
-    path: "/products",
-    name: "Products",
+    path: "/catalogue",
+    name: "Catalogue",
     icon: "view_module",
   },
   {

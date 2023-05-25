@@ -1,4 +1,3 @@
-import React from "react";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -27,7 +26,7 @@ const Login = () => {
     <Container component="main" maxWidth="sm">
       <CssBaseline />
       <Box
-        mt={20}
+        mt={10}
         p={4}
         sx={{
           display: "flex",

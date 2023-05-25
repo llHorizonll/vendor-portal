@@ -22,7 +22,7 @@ export default function ResetPassword() {
     <Container component="main" maxWidth="sm">
       <CssBaseline />
       <Box
-        mt={20}
+        mt={10}
         p={4}
         sx={{
           display: "flex",

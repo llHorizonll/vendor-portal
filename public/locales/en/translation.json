@@ -124,7 +124,29 @@
       "404": "Sorry, the page you visited does not exist.",
       "resource404": "Are you sure you have created the {{resource}} resource.",
       "backHome": "Back Home"
-    }
+    },
+    "dashboard": {
+      "title": "Dashboard"
+    },
+    "contacts": { "title": "Contacts" },
+    "quotations": {},
+    "purchaseOrder": {},
+    "catalogue": { "title": "Catalogue" },
+    "pricelist": {},
+    "setting": {
+      "brands": {
+        "title": "Brands"
+      },
+      "unit": { "title": "Unit of Sales" },
+      "category": { "title": "Category" },
+      "company": {
+        "title": "Company profile"
+      },
+      "users": { "title": "User management" },
+      "logs": { "title": "View log" }
+    },
+    "help": {},
+    "profile": {}
   },
   "actions": {
     "list": "List",
@@ -168,9 +190,7 @@
   "tags": {
     "clone": "Clone"
   },
-  "dashboard": {
-    "title": "Dashboard"
-  },
+
   "blog_posts": {
     "blog_posts": "Blog Posts",
     "fields": {

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements, defer } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { ColorModeContextProvider } from "./utils/themes";
@@ -13,12 +14,14 @@ import RegisterSuccess from "./pages/Register/RegisterSuccess";
 import Dashboard from "./pages/Dashboard";
 import HomeLayout from "./layout/HomeLayout";
 import ResetPassword from "./pages/ResetPassword";
-import Contacts from "./pages/Contacts";
+import { getContactsList, getContactsById } from "./services/contacts";
+import Contacts from "./pages/Contacts/Contacts";
+import ContactItem from "./pages/Contacts/ContactItem";
 import Quotations from "./pages/Quotations";
 import PurchaseOrder from "./pages/PurchaseOrder";
-import Products from "./pages/Products";
+import Catalogue from "./pages/Catalogue/Catalogue";
 import PriceLists from "./pages/PriceLists";
-import Settings from "./pages/Settings";
+import Settings from "./pages/Settings/Settings";
 import Help from "./pages/Help";
 
 const getUserData = () =>
@@ -45,11 +48,10 @@ const App = () => {
 
         <Route path="/" element={<ProtectedLayout />}>
           <Route index element={<Dashboard />} loader={async () => await fetch("src/services/dashboard.json")} />
-          <Route
-            path="/contacts"
-            element={<Contacts />}
-            loader={async () => await fetch("https://dummyjson.com/users")}
-          />
+          <Route path="contacts" element={<Contacts />} loader={getContactsList} />
+          <Route path="contacts/:contactId" element={<ContactItem />} loader={getContactsById} />
+          {/* <Route path="contacts/:contactId/edit" element={<EditContact />} loader={contactLoader} action={editAction} />
+          <Route path="contacts/:contactId/destroy" action={destroyAction} /> */}
           <Route
             path="/quotations"
             element={<Quotations />}
@@ -61,8 +63,8 @@ const App = () => {
             loader={async () => await fetch("src/services/contacts.json")}
           />
           <Route
-            path="/products"
-            element={<Products />}
+            path="/catalogue"
+            element={<Catalogue />}
             loader={async () => await fetch("src/services/contacts.json")}
           />
           <Route
