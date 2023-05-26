@@ -28,6 +28,7 @@
     "react-hook-form": "^7.43.9",
     "react-i18next": "^12.3.1",
     "react-router-dom": "^6.11.2",
+    "thai-address-database": "^0.0.29",
     "zod": "^3.21.4"
   },
   "devDependencies": {
