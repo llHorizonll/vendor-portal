@@ -25,7 +25,7 @@ const Contacts = () => {
       <Typography p={2} component={"h4"} variant="h4">
         {t("pages.contacts.title")}
       </Typography>
-      <Grid p={1} container spacing={1}>
+      <Grid p={1} container spacing={1} alignItems={"stretch"}>
         {users.map((item, index) => (
           <Grid key={index} xs={12} sm={4} item>
             <Card
@@ -35,6 +35,7 @@ const Contacts = () => {
               }}
             >
               <CardHeader
+                sx={{ height: "6vw" }}
                 avatar={
                   <Avatar sx={{ backgroundColor: item.eyeColor }}>{item.firstName[0] + item.firstName[1]}</Avatar>
                 }

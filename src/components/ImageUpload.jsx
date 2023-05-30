@@ -4,16 +4,19 @@ import { styled } from "@mui/material/styles";
 import { useCallback, useRef, useState } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import uploadImg from "../assets/cloud-upload.png";
-import pdf from "../assets/pdf.png";
-import doc from "../assets/doc.png";
+import png from "../assets/png.png";
+import jpg from "../assets/jpg.png";
+import svg from "../assets/svg.png";
 import defaultImage from "../assets/default.png";
-import docx from "../assets/docx-file.png";
+import jpeg from "../assets/jpeg.png";
 
-const FileConfig = {
-  pdf,
-  doc,
-  docx,
+const ImageConfig = {
+  png,
+  jpg,
+  svg,
+  "svg+xml": svg,
   default: defaultImage,
+  jpeg,
 };
 
 const CustomBox = styled(Box)({
@@ -38,7 +41,7 @@ const ImageUpload = ({ limit, multiple, name }) => {
   const onDragEnter = () => wrapperRef.current?.classList.add("dragover");
   const onDragLeave = () => wrapperRef.current?.classList.remove("dragover");
 
-  // 👇 File Upload Service
+  // 👇 Image Upload Service
   const onFileDrop = useCallback(
     (e) => {
       const target = e.target;
@@ -47,7 +50,7 @@ const ImageUpload = ({ limit, multiple, name }) => {
       if (limit === 1) {
         console.log(target.files);
         const newFile = Object.values(target.files).map((file) => file);
-        if (singleFile.length >= 1) return alert("Only a single file allowed");
+        if (singleFile.length >= 1) return alert("Only a single image allowed");
         setSingleFile(newFile);
       }
 
@@ -56,7 +59,7 @@ const ImageUpload = ({ limit, multiple, name }) => {
         if (newFiles) {
           const updatedList = [...fileList, ...newFiles];
           if (updatedList.length > limit || newFiles.length > 3) {
-            return alert(`File must not be more than ${limit}`);
+            return alert(`Image must not be more than ${limit}`);
           }
           setFileList(updatedList);
         }
@@ -65,14 +68,14 @@ const ImageUpload = ({ limit, multiple, name }) => {
     [fileList, limit, multiple, singleFile]
   );
 
-  // 👇 remove multiple files
+  // 👇 remove multiple images
   const fileRemove = (file) => {
     const updatedList = [...fileList];
     updatedList.splice(fileList.indexOf(file), 1);
     setFileList(updatedList);
   };
 
-  // 👇 remove single file
+  // 👇 remove single image
   const fileSingleRemove = () => {
     setSingleFile([]);
   };
@@ -113,7 +116,7 @@ const ImageUpload = ({ limit, multiple, name }) => {
               <strong>Supported Files</strong>
             </Typography>
             <Typography variant="body2" component="span">
-              PDF, DOC, DOCX
+              JPG, JPEG, PNG
             </Typography>
           </Stack>
           <input
@@ -121,7 +124,7 @@ const ImageUpload = ({ limit, multiple, name }) => {
             name={name}
             onChange={onFileDrop}
             multiple={multiple}
-            accept="application/pdf, .doc,.docx,application/msword"
+            accept="image/jpg, image/png, image/jpeg"
             style={{
               opacity: 0,
               position: "absolute",
@@ -139,7 +142,7 @@ const ImageUpload = ({ limit, multiple, name }) => {
       {fileList.length > 0 || singleFile.length > 0 ? (
         <Stack spacing={2} sx={{ my: 2 }}>
           {(multiple ? fileList : singleFile).map((item, index) => {
-            const fileType = item.type.split("/")[1];
+            const imageType = item.type.split("/")[1];
             return (
               <Box
                 key={index}
@@ -152,7 +155,7 @@ const ImageUpload = ({ limit, multiple, name }) => {
               >
                 <Box display="flex">
                   <img
-                    src={FileConfig[`${fileType}`] || FileConfig["default"]}
+                    src={ImageConfig[`${imageType}`] || ImageConfig["default"]}
                     alt="upload"
                     style={{
                       height: "3.5rem",

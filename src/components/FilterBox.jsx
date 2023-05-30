@@ -1,18 +1,19 @@
-import { useLoaderData, useSubmit } from "react-router-dom";
+import { useSubmit, useSearchParams } from "react-router-dom";
 import { Form } from "react-router-dom";
-import { Grid, Paper, TextField, InputAdornment, Icon, Chip } from "@mui/material";
+import { Grid, Paper, TextField, InputAdornment, Icon, Chip, IconButton } from "@mui/material";
 import PropTypes from "prop-types";
 
 export default function FilterlistBox({ keys, filterBy, setFilterBy, noFilter = false }) {
-  const { q } = useLoaderData();
+  const [searchParams, setSearchParams] = useSearchParams();
   const submit = useSubmit();
+  const q = searchParams.get("q");
 
   return (
     <Paper
       sx={{
         p: 2,
         flexGrow: 1,
-        backgroundColor: "#EEEEEE",
+        backgroundColor: "seconday.main",
         borderRadius: 0,
       }}
     >
@@ -24,7 +25,7 @@ export default function FilterlistBox({ keys, filterBy, setFilterBy, noFilter = 
               variant="outlined"
               size="small"
               sx={{
-                backgroundColor: "#fff",
+                backgroundColor: "text.main",
                 borderRadius: 10,
                 [`& fieldset`]: {
                   borderRadius: 10,
@@ -39,7 +40,14 @@ export default function FilterlistBox({ keys, filterBy, setFilterBy, noFilter = 
                 ),
                 endAdornment: (
                   <InputAdornment position="end">
-                    <Icon>close</Icon>
+                    <IconButton
+                      onClick={() => {
+                        setSearchParams();
+                        submit();
+                      }}
+                    >
+                      <Icon>close</Icon>
+                    </IconButton>
                   </InputAdornment>
                 ),
               }}

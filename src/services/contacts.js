@@ -7,7 +7,7 @@ export async function getContactsList({ request }) {
   if (q) {
     const { data } = await axios.get(`https://dummyjson.com/users/search?q=${q}`);
     const contactList = data;
-    return { contactList, q };
+    return { contactList };
   } else {
     const { data } = await axios.get(`https://dummyjson.com/users`);
     const contactList = data;
@@ -16,7 +16,7 @@ export async function getContactsList({ request }) {
 }
 
 export async function getContactsById({ params }) {
-  const { data } = await axios.get(`https://dummyjson.com/users/${params.id}`);
+  const { data } = await axios.get(`https://dummyjson.com/users/${params.contactId}`);
   const contact = data;
   return defer({ contact });
 }

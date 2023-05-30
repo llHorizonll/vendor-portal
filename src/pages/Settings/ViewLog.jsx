@@ -7,7 +7,7 @@ const ViewLog = () => {
   return (
     <>
       <FilterlistBox noFilter={true} />
-      <BoxHeader title={t("pages.setting.logs.title")} noButton={true} />
+      <BoxHeader title={t("pages.setting.logs.title")} />
     </>
   );
 };

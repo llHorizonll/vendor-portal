@@ -59,32 +59,6 @@ FolderArrow.propTypes = {
   node: PropTypes.shape(NodeApi),
 };
 
-function Node({ node, style, dragHandle }) {
-  //const IconItem = node.isInternal ? BsMapFill : BsGeoFill;
-  const indentSize = Number.parseFloat(`${style.paddingLeft || 0}`);
-  return (
-    <div
-      ref={dragHandle}
-      style={style}
-      className={clsx("node", node.state.isSelected ? "isSelected" : null)}
-      onClick={() => node.isInternal && node.toggle()}
-    >
-      <div className={"indentLines"}>
-        {new Array(indentSize / 15).fill(0).map((_, index) => {
-          return <div key={index}></div>;
-        })}
-      </div>
-      <FolderArrow node={node} /> <span className={textStyle}>{node.isEditing ? node.data.name : node.data.name}</span>
-    </div>
-  );
-}
-
-Node.propTypes = {
-  node: PropTypes.object,
-  style: PropTypes.object,
-  dragHandle: PropTypes.func,
-};
-
 const Category = () => {
   const [searchParams] = useSearchParams();
   const theme = useTheme();
@@ -96,9 +70,62 @@ const Category = () => {
   const [selectedCount, setSelectedCount] = useState(0);
   const [count, setCount] = useState(0);
 
+  const treeBox = css`
+  border-radius: 16px;
+  background:  ${theme.palette.mode === "dark" ? "grey" : "#efefef"};
+`;
+
   useEffect(() => {
     setCount(tree?.visibleNodes.length ?? 0);
   }, [tree, searchParams]);
+
+  function AddChildren({ node }) {
+    function addChildTree(node) {
+      node.tree.create({ parentId: node.id });
+      setTimeout(() => {
+        const newNode = node.tree.focusedNode;
+        setActive({
+          id: newNode?.data.id,
+          name: newNode?.data.name,
+        });
+      }, 10);
+    }
+    return node.isSelected ? <Icon onClick={() => addChildTree(node)}>add</Icon> : null;
+  }
+
+  AddChildren.propTypes = {
+    node: PropTypes.shape(NodeApi),
+    setActive: PropTypes.func,
+  };
+
+  function Node({ node, style, dragHandle }) {
+    //const IconItem = node.isInternal ? BsMapFill : BsGeoFill;
+    const indentSize = Number.parseFloat(`${style.paddingLeft || 0}`);
+    return (
+      <div
+        ref={dragHandle}
+        style={style}
+        className={clsx("node", node.state.isSelected ? "isSelected" : null)}
+        onClick={() => node.isInternal && node.toggle()}
+      >
+        <div className={"indentLines"}>
+          {new Array(indentSize / 15).fill(0).map((_, index) => {
+            return <div key={index}></div>;
+          })}
+        </div>
+        <FolderArrow node={node} />{" "}
+        <span className={textStyle}>{node.isEditing ? node.data.name : node.data.name}</span>
+        <AddChildren node={node} />
+      </div>
+    );
+  }
+
+  Node.propTypes = {
+    node: PropTypes.object,
+    style: PropTypes.object,
+    dragHandle: PropTypes.func,
+    setActive: PropTypes.func,
+  };
 
   return (
     <>
@@ -110,8 +137,8 @@ const Category = () => {
           setTimeout(() => {
             const newNode = tree.focusedNode;
             setActive({
-              id: newNode.data.id,
-              name: newNode.data.name,
+              id: newNode?.data.id,
+              name: newNode?.data.name,
             });
           }, 10);
         }}
@@ -127,7 +154,7 @@ const Category = () => {
             openByDefault={true}
             searchTerm={searchParams.get("q")}
             selection={active?.id}
-            className={"tree"}
+            className={`tree ${treeBox}`}
             rowClassName={"row"}
             width={matchesSm ? "94%" : "100%"}
             height={matchesSm ? 400 : 240}
@@ -154,7 +181,7 @@ const Category = () => {
             xs={12}
             sm={8}
             sx={{ display: "flex", flexDirection: "column" }}
-            className="tree"
+            className={treeBox}
             item
           >
             <Box mb={1} display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
@@ -190,6 +217,8 @@ const Category = () => {
                 onClick={() => {
                   const newNode = tree.get(active.id);
                   newNode.submit(active.name);
+                  tree.deselectAll();
+                  setActive();
                 }}
               >
                 {" "}
@@ -199,7 +228,16 @@ const Category = () => {
                 variant="outlined"
                 color="inherit"
                 onClick={() => {
-                  console.log("in");
+                  console.log(active);
+                  const currentNode = tree.get(active.id);
+                  if (currentNode.data.name === "") {
+                    tree.delete(active.id);
+                    tree.deselectAll();
+                    setActive();
+                  } else {
+                    tree.deselectAll();
+                    setActive();
+                  }
                 }}
               >
                 {" "}

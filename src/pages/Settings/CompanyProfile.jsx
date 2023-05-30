@@ -1,10 +1,11 @@
 import { useTranslation } from "react-i18next";
 import BoxHeader from "../../components/BoxHeader";
 import FilterlistBox from "../../components/FilterBox";
-import { Box, Button, Grid, TextField } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography } from "@mui/material";
 import AvatarUpload from "../../components/AvatarUpload";
 import { useForm, Controller } from "react-hook-form";
 import SelectThaiAddress from "../../components/SelectThaiAddress";
+import FileUpload from "../../components/FileUpload";
 
 const CompanyProfile = () => {
   const { t } = useTranslation();
@@ -12,16 +13,17 @@ const CompanyProfile = () => {
     defaultValues: {
       image: {},
       name: "",
+      address1: "",
+      address2: "",
       subdistrict: "",
       district: "",
       province: "",
       zipcode: "",
-      birthday: {
-        date: "",
-        month: "",
-        year: "",
-      },
-      select: {},
+      branch: "",
+      businessId: "",
+      taxId: "",
+      email: "",
+      phone: "",
     },
   });
 
@@ -32,101 +34,144 @@ const CompanyProfile = () => {
   return (
     <Box sx={{ height: 1080, overflow: "auto" }}>
       <FilterlistBox noFilter={true} />
-      <BoxHeader title={t("pages.setting.company.title")} noButton={true} />
-      <AvatarUpload />
+      <BoxHeader title={t("pages.setting.company.title")} />
+
       <Box p={2}>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <Grid container spacing={2}>
-            <Grid xs={12} item>
-              <Controller
-                name="name"
-                control={control}
-                render={({ field }) => <TextField size="small" label="Name" fullWidth disabled {...field} />}
-              />
-            </Grid>
-            <Grid xs={12} item>
-              <Controller
-                name="name"
-                control={control}
-                render={({ field }) => <TextField size="small" label="Address #1" fullWidth disabled {...field} />}
-              />
-            </Grid>
-            <Grid xs={12} item>
-              <Controller
-                name="name"
-                control={control}
-                render={({ field }) => <TextField size="small" label="Address #2" fullWidth disabled {...field} />}
-              />
+          <Grid container spacing={1}>
+            <Grid xs={12} md={6} item>
+              <AvatarUpload />
+              <Grid container spacing={2}>
+                <Grid xs={12} item>
+                  <Controller
+                    name="name"
+                    control={control}
+                    render={({ field }) => <TextField size="small" label="Name" fullWidth disabled {...field} />}
+                  />
+                </Grid>
+                <Grid xs={12} item>
+                  <Controller
+                    name="address1"
+                    control={control}
+                    render={({ field }) => <TextField size="small" label="Address #1" fullWidth disabled {...field} />}
+                  />
+                </Grid>
+                <Grid xs={12} item>
+                  <Controller
+                    name="address2"
+                    control={control}
+                    render={({ field }) => <TextField size="small" label="Address #2" fullWidth disabled {...field} />}
+                  />
+                </Grid>
+                <Grid xs={12} md={6} item>
+                  <Controller
+                    name="subdistrict"
+                    control={control}
+                    render={({ field }) => {
+                      return (
+                        <SelectThaiAddress
+                          delimiter={","}
+                          label={"ตำบล"}
+                          name={field.name}
+                          value={field.value}
+                          setValue={setValue}
+                        />
+                      );
+                    }}
+                  />
+                </Grid>
+                <Grid xs={12} md={6} item>
+                  <Controller
+                    name="district"
+                    control={control}
+                    render={({ field }) => {
+                      return (
+                        <SelectThaiAddress
+                          delimiter={","}
+                          label={"อำเภอ"}
+                          name={field.name}
+                          value={field.value}
+                          setValue={setValue}
+                        />
+                      );
+                    }}
+                  />
+                </Grid>
+                <Grid xs={12} md={6} item>
+                  <Controller
+                    name="province"
+                    control={control}
+                    render={({ field }) => {
+                      return (
+                        <SelectThaiAddress
+                          delimiter={","}
+                          label={"จังหวัด"}
+                          name={field.name}
+                          value={field.value}
+                          setValue={setValue}
+                        />
+                      );
+                    }}
+                  />
+                </Grid>
+                <Grid xs={12} md={6} item>
+                  <Controller
+                    name="zipcode"
+                    control={control}
+                    render={({ field }) => {
+                      return (
+                        <SelectThaiAddress
+                          delimiter={","}
+                          label={"รหัสไปรษณีย์"}
+                          name={field.name}
+                          value={field.value}
+                          setValue={setValue}
+                        />
+                      );
+                    }}
+                  />
+                </Grid>
+                <Grid xs={12} md={6} item>
+                  <Controller
+                    name="branch"
+                    control={control}
+                    render={({ field }) => <TextField size="small" label="Branch1" fullWidth disabled {...field} />}
+                  />
+                </Grid>
+                <Grid xs={12} md={6} item>
+                  <Controller
+                    name="businessId"
+                    control={control}
+                    render={({ field }) => <TextField size="small" label="Business ID" fullWidth disabled {...field} />}
+                  />
+                </Grid>
+                <Grid xs={12} md={12} item>
+                  <Controller
+                    name="taxId"
+                    control={control}
+                    render={({ field }) => <TextField size="small" label="TAX ID" fullWidth disabled {...field} />}
+                  />
+                </Grid>
+                <Grid xs={12} md={12} item>
+                  <Controller
+                    name="email"
+                    control={control}
+                    render={({ field }) => <TextField size="small" label="Email" fullWidth disabled {...field} />}
+                  />
+                </Grid>
+                <Grid xs={12} md={12} item>
+                  <Controller
+                    name="phone"
+                    control={control}
+                    render={({ field }) => <TextField size="small" label="Phone" fullWidth disabled {...field} />}
+                  />
+                </Grid>
+              </Grid>
             </Grid>
             <Grid xs={12} md={6} item>
-              <Controller
-                name="subdistrict"
-                control={control}
-                render={({ field }) => {
-                  return (
-                    <SelectThaiAddress
-                      delimiter={","}
-                      label={"ตำบล"}
-                      name={field.name}
-                      value={field.value}
-                      setValue={setValue}
-                    />
-                  );
-                }}
-              />
+              <Typography variant="h6">Official Documents</Typography>
+              <FileUpload limit={5} multiple name="doc" />
             </Grid>
-            <Grid xs={12} md={6} item>
-              <Controller
-                name="district"
-                control={control}
-                render={({ field }) => {
-                  return (
-                    <SelectThaiAddress
-                      delimiter={","}
-                      label={"อำเภอ"}
-                      name={field.name}
-                      value={field.value}
-                      setValue={setValue}
-                    />
-                  );
-                }}
-              />
-            </Grid>
-            <Grid xs={12} md={6} item>
-              <Controller
-                name="province"
-                control={control}
-                render={({ field }) => {
-                  return (
-                    <SelectThaiAddress
-                      delimiter={","}
-                      label={"จังหวัด"}
-                      name={field.name}
-                      value={field.value}
-                      setValue={setValue}
-                    />
-                  );
-                }}
-              />
-            </Grid>
-            <Grid xs={12} md={6} item>
-              <Controller
-                name="zipcode"
-                control={control}
-                render={({ field }) => {
-                  return (
-                    <SelectThaiAddress
-                      delimiter={","}
-                      label={"รหัสไปรษณีย์"}
-                      name={field.name}
-                      value={field.value}
-                      setValue={setValue}
-                    />
-                  );
-                }}
-              />
-            </Grid>
-
             <Grid xs={12} item>
               <Button variant="contained" color="primary" type="submit" fullWidth>
                 Save
