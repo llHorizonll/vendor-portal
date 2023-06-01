@@ -71,9 +71,9 @@ const Category = () => {
   const [count, setCount] = useState(0);
 
   const treeBox = css`
-  border-radius: 16px;
-  background:  ${theme.palette.mode === "dark" ? "grey" : "#efefef"};
-`;
+    border-radius: 16px;
+    background: ${theme.palette.mode === "dark" ? "grey" : "#efefef"};
+  `;
 
   useEffect(() => {
     setCount(tree?.visibleNodes.length ?? 0);
@@ -154,7 +154,7 @@ const Category = () => {
             openByDefault={true}
             searchTerm={searchParams.get("q")}
             selection={active?.id}
-            className={`tree ${treeBox}`}
+            className={treeBox}
             rowClassName={"row"}
             width={matchesSm ? "94%" : "100%"}
             height={matchesSm ? 400 : 240}

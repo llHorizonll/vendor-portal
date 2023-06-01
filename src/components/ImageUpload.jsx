@@ -48,7 +48,6 @@ const ImageUpload = ({ limit, multiple, name }) => {
       if (!target.files) return;
 
       if (limit === 1) {
-        console.log(target.files);
         const newFile = Object.values(target.files).map((file) => file);
         if (singleFile.length >= 1) return alert("Only a single image allowed");
         setSingleFile(newFile);

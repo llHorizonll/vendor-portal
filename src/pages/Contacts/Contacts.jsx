@@ -3,7 +3,8 @@ import { useTranslation } from "react-i18next";
 import { useNavigate, useLoaderData } from "react-router-dom";
 import FilterlistBox from "../../components/FilterBox";
 import { useState } from "react";
-import { Avatar, Grid, Card, CardHeader, Chip, Typography } from "@mui/material";
+import { Avatar, Grid, Card, CardHeader, Chip } from "@mui/material";
+import BoxHeader from "../../components/BoxHeader";
 
 const Contacts = () => {
   const { t } = useTranslation();
@@ -22,12 +23,10 @@ const Contacts = () => {
   return (
     <div>
       <FilterlistBox {...filterProps} />
-      <Typography p={2} component={"h4"} variant="h4">
-        {t("pages.contacts.title")}
-      </Typography>
+      <BoxHeader title={t("pages.contacts.title")} />
       <Grid p={1} container spacing={1} alignItems={"stretch"}>
         {users.map((item, index) => (
-          <Grid key={index} xs={12} sm={4} item>
+          <Grid key={index} xs={12} md={4} item>
             <Card
               sx={{ cursor: "pointer" }}
               onClick={() => {
@@ -35,7 +34,6 @@ const Contacts = () => {
               }}
             >
               <CardHeader
-                sx={{ height: "6vw" }}
                 avatar={
                   <Avatar sx={{ backgroundColor: item.eyeColor }}>{item.firstName[0] + item.firstName[1]}</Avatar>
                 }

@@ -14,15 +14,16 @@ import RegisterSuccess from "./pages/Register/RegisterSuccess";
 import Dashboard from "./pages/Dashboard";
 import HomeLayout from "./layout/HomeLayout";
 import ResetPassword from "./pages/ResetPassword";
-import { getContactsList, getContactsById } from "./services/contacts";
+import { getContactsList, getContactsById, updateContact } from "./services/contacts";
 import Contacts from "./pages/Contacts/Contacts";
-import ContactItem from "./pages/Contacts/ContactItem";
 import Quotations from "./pages/Quotations";
 import PurchaseOrder from "./pages/PurchaseOrder";
 import Catalogue from "./pages/Catalogue/Catalogue";
 import PriceLists from "./pages/PriceLists";
 import Settings from "./pages/Settings/Settings";
 import Help from "./pages/Help";
+import ViewContact from "./pages/Contacts/View";
+import EditContact from "./pages/Contacts/Edit";
 
 const getUserData = () =>
   new Promise((resolve) =>
@@ -49,7 +50,13 @@ const App = () => {
         <Route path="/" element={<ProtectedLayout />}>
           <Route index element={<Dashboard />} loader={async () => await fetch("src/services/dashboard.json")} />
           <Route path="contacts" element={<Contacts />} loader={getContactsList} />
-          <Route path="contacts/:contactId" element={<ContactItem />} loader={getContactsById} />
+          <Route path="contacts/:contactId" element={<ViewContact />} loader={getContactsById} />
+          <Route
+            path="contacts/:contactId/edit"
+            element={<EditContact />}
+            loader={getContactsById}
+            action={updateContact}
+          />
           {/* <Route path="contacts/:contactId/edit" element={<EditContact />} loader={contactLoader} action={editAction} />
           <Route path="contacts/:contactId/destroy" action={destroyAction} /> */}
           <Route

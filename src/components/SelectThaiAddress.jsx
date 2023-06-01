@@ -10,7 +10,7 @@ import {
 import PropTypes from "prop-types";
 import { Box } from "@mui/material";
 
-export default function SelectThaiAddress({ delimiter, label, name, value, setValue }) {
+export default function SelectThaiAddress({ delimiter, label, name, value, setValue, disabled }) {
   const [inputValue, setInputValue] = useState(value);
   const finder = (searchBy, txt) => {
     switch (searchBy) {
@@ -72,6 +72,7 @@ export default function SelectThaiAddress({ delimiter, label, name, value, setVa
         return <TextField {...params} label={label} />;
       }}
       filterOptions={(_, { inputValue }) => handleSearch(inputValue)}
+      disabled={disabled}
     />
   );
 }
@@ -82,4 +83,5 @@ SelectThaiAddress.propTypes = {
   name: PropTypes.string,
   value: PropTypes.string,
   setValue: PropTypes.func,
+  disabled: PropTypes.bool,
 };

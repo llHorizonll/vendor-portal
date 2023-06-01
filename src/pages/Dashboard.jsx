@@ -7,11 +7,7 @@ const Dashboard = () => {
       //navigator.serviceWorker.register("/dist/custom-sw.js");
       Notification.requestPermission(function (result) {
         if (result === "granted") {
-          console.log(navigator.serviceWorker);
-
           navigator.serviceWorker.ready.then(function (registration) {
-            console.log(registration);
-
             registration.showNotification("Notification Title", {
               body: "Notification Title Body",
               vibrate: [200, 100, 200],
