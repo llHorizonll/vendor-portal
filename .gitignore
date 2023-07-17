@@ -26,4 +26,4 @@ dist-ssr
 .vercel
 
 #localhost ssl
-.pem
+*.pem
