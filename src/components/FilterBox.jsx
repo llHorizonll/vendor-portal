@@ -2,12 +2,13 @@ import { useSubmit, useSearchParams } from "react-router-dom";
 import { Form } from "react-router-dom";
 import { Grid, Paper, TextField, InputAdornment, Icon, Chip, IconButton } from "@mui/material";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 export default function FilterlistBox({ keys, filterBy, setFilterBy, noFilter = false }) {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams("");
   const submit = useSubmit();
   const q = searchParams.get("q");
-
+  const [searchValue, setSeachValue] = useState(q ?? "");
   return (
     <Paper
       sx={{
@@ -42,8 +43,8 @@ export default function FilterlistBox({ keys, filterBy, setFilterBy, noFilter = 
                   <InputAdornment position="end">
                     <IconButton
                       onClick={() => {
-                        setSearchParams();
-                        submit();
+                        submit("");
+                        setSeachValue("");
                       }}
                     >
                       <Icon>close</Icon>
@@ -51,12 +52,11 @@ export default function FilterlistBox({ keys, filterBy, setFilterBy, noFilter = 
                   </InputAdornment>
                 ),
               }}
-              // value={searchValue}
-              // onChange={(e) => setSearchValue(e.target.value)}
               id="q"
               name="q"
-              defaultValue={q}
+              value={searchValue}
               onChange={(event) => {
+                setSeachValue(event.target.value);
                 submit(event.currentTarget.form);
               }}
             />

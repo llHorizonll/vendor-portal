@@ -15,15 +15,18 @@ import Dashboard from "./pages/Dashboard";
 import HomeLayout from "./layout/HomeLayout";
 import ResetPassword from "./pages/ResetPassword";
 import { getContactsList, getContactsById, updateContact } from "./services/contacts";
+import { getProductList, getProductById, updateProduct } from "./services/products";
 import Contacts from "./pages/Contacts/Contacts";
+import ViewContact from "./pages/Contacts/View";
+import EditContact from "./pages/Contacts/Edit";
 import Quotations from "./pages/Quotations";
 import PurchaseOrder from "./pages/PurchaseOrder";
 import Catalogue from "./pages/Catalogue/Catalogue";
+import EditCatalogue from "./pages/Catalogue/Edit";
+import ViewCatalogue from "./pages/Catalogue/View";
 import PriceLists from "./pages/PriceLists";
 import Settings from "./pages/Settings/Settings";
 import Help from "./pages/Help";
-import ViewContact from "./pages/Contacts/View";
-import EditContact from "./pages/Contacts/Edit";
 
 const getUserData = () =>
   new Promise((resolve) =>
@@ -57,6 +60,7 @@ const App = () => {
             loader={getContactsById}
             action={updateContact}
           />
+
           {/* <Route path="contacts/:contactId/edit" element={<EditContact />} loader={contactLoader} action={editAction} />
           <Route path="contacts/:contactId/destroy" action={destroyAction} /> */}
           <Route
@@ -69,10 +73,13 @@ const App = () => {
             element={<PurchaseOrder />}
             loader={async () => await fetch("src/services/contacts.json")}
           />
+          <Route path="/catalogue" element={<Catalogue />} loader={getProductList} />
+          <Route path="catalogue/:catalogueId" element={<ViewCatalogue />} loader={getProductById} />
           <Route
-            path="/catalogue"
-            element={<Catalogue />}
-            loader={async () => await fetch("src/services/contacts.json")}
+            path="catalogue/:catalogueId/edit"
+            element={<EditCatalogue />}
+            loader={getProductById}
+            action={updateProduct}
           />
           <Route
             path="/price-lists"

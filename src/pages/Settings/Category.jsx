@@ -65,6 +65,7 @@ const Category = () => {
   const matchesSm = useMediaQuery(theme.breakpoints.up("sm"));
   const { t } = useTranslation();
   const [tree, setTree] = useState(null);
+  const [mode, setMode] = useState();
   const [active, setActive] = useState();
   const [focused, setFocused] = useState(null);
   const [selectedCount, setSelectedCount] = useState(0);
@@ -83,7 +84,10 @@ const Category = () => {
     function addChildTree(node) {
       node.tree.create({ parentId: node.id });
       setTimeout(() => {
+        setMode("add");
         const newNode = node.tree.focusedNode;
+        console.log(newNode);
+
         setActive({
           id: newNode?.data.id,
           name: newNode?.data.name,
@@ -135,6 +139,7 @@ const Category = () => {
         CreateFnc={() => {
           tree.create();
           setTimeout(() => {
+            setMode("add");
             const newNode = tree.focusedNode;
             setActive({
               id: newNode?.data.id,
@@ -154,7 +159,7 @@ const Category = () => {
             openByDefault={true}
             searchTerm={searchParams.get("q")}
             selection={active?.id}
-            className={treeBox}
+            className={`tree ${treeBox}`}
             rowClassName={"row"}
             width={matchesSm ? "94%" : "100%"}
             height={matchesSm ? 400 : 240}
@@ -186,15 +191,27 @@ const Category = () => {
           >
             <Box mb={1} display={"flex"} justifyContent={"space-between"} alignItems={"center"}>
               <div>id : {active?.id}</div>
-              <IconButton
-                onClick={() => {
-                  tree.delete(active.id);
-                  tree.deselectAll();
-                  setActive();
-                }}
-              >
-                <Icon>delete</Icon>
-              </IconButton>
+              <Box sx={{ flexGrow: 1 }} />
+              {!mode && (
+                <>
+                  <IconButton
+                    onClick={() => {
+                      setMode("edit");
+                    }}
+                  >
+                    <Icon>edit</Icon>
+                  </IconButton>
+                  <IconButton
+                    onClick={() => {
+                      tree.delete(active.id);
+                      tree.deselectAll();
+                      setActive();
+                    }}
+                  >
+                    <Icon>delete</Icon>
+                  </IconButton>
+                </>
+              )}
             </Box>
             <TextField
               size="small"
@@ -206,44 +223,50 @@ const Category = () => {
                   name: event.target.value,
                 });
               }}
-              autoFocus
+              disabled={!mode}
             />
             <Box sx={{ flexGrow: 1 }} />
-            <Box pt={matchesSm ? 2 : 10} display={"flex"} justifyContent={"space-evenly"} alignItems={"center"}>
-              <Button
-                variant="contained"
-                color="primary"
-                startIcon={<Icon>save</Icon>}
-                onClick={() => {
-                  const newNode = tree.get(active.id);
-                  newNode.submit(active.name);
-                  tree.deselectAll();
-                  setActive();
-                }}
+            {mode && (
+              <Box
+                pt={matchesSm ? 2 : 10}
+                display={"flex"}
+                justifyContent={"space-evenly"}
+                alignItems={"center"}
+                gap={2}
               >
-                {" "}
-                save
-              </Button>
-              <Button
-                variant="outlined"
-                color="inherit"
-                onClick={() => {
-                  console.log(active);
-                  const currentNode = tree.get(active.id);
-                  if (currentNode.data.name === "") {
-                    tree.delete(active.id);
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<Icon>save</Icon>}
+                  onClick={() => {
+                    setMode();
+                    const newNode = tree.get(active.id);
+                    newNode.submit(active.name);
                     tree.deselectAll();
                     setActive();
-                  } else {
-                    tree.deselectAll();
-                    setActive();
-                  }
-                }}
-              >
-                {" "}
-                cancel
-              </Button>
-            </Box>
+                  }}
+                  fullWidth
+                >
+                  {t("buttons.save")}
+                </Button>
+                <Button
+                  variant="outlined"
+                  color="inherit"
+                  onClick={() => {
+                    setMode();
+                    const currentNode = tree.get(active.id);
+                    if (currentNode.data.name === "") {
+                      tree.delete(active.id);
+                      tree.deselectAll();
+                      setActive();
+                    }
+                  }}
+                  fullWidth
+                >
+                  {t("buttons.cancel")}
+                </Button>
+              </Box>
+            )}
           </Grid>
         ) : null}
       </Grid>

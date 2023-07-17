@@ -100,8 +100,8 @@ const EditContact = () => {
       <BoxHeader title={t("pages.contacts.title")} ButtonElement={MuiButtonGroup} />
       <Suspense fallback={<small>Loading Comments...</small>}>
         <Await resolve={contact}>
-          <Box px={2} sx={{ height: 1080, overflow: "auto" }}>
-            <Form method="post" action="/contacts" onSubmit={handleSubmit(onSubmit)}>
+          <Form method="post" action="/contacts" onSubmit={handleSubmit(onSubmit)}>
+            <Box px={2}>
               <Grid container spacing={4}>
                 <Grid xs={12} md={4} item>
                   <Typography variant="h6" sx={{ textTransform: "uppercase" }}>
@@ -367,28 +367,30 @@ const EditContact = () => {
                     </Grid>
                   </Grid>
                 </Grid>
-                {mode === "edit" && (
-                  <>
-                    <Grid xs={12} sm={6} item>
-                      <Button variant="contained" color="primary" type="submit" fullWidth>
-                        Save
-                      </Button>
-                    </Grid>
-                    <Grid xs={12} sm={6} item>
-                      <Button
-                        variant="contained"
-                        color="inherit"
-                        fullWidth
-                        onClick={() => (mode === "add" ? navigate("/contacts") : navigate(`/contacts/${contactId}`))}
-                      >
-                        Cancel
-                      </Button>
-                    </Grid>
-                  </>
-                )}
               </Grid>
-            </Form>
-          </Box>
+            </Box>
+            <Box px={2}>
+              {mode === "edit" && (
+                <Grid container spacing={2} mt={1} mb={2}>
+                  <Grid xs={12} sm={6} md={4} item>
+                    <Button variant="contained" color="primary" type="submit" fullWidth>
+                      Save
+                    </Button>
+                  </Grid>
+                  <Grid xs={12} sm={6} md={4} item>
+                    <Button
+                      variant="contained"
+                      color="inherit"
+                      fullWidth
+                      onClick={() => (mode === "add" ? navigate("/contacts") : navigate(`/contacts/${contactId}`))}
+                    >
+                      Cancel
+                    </Button>
+                  </Grid>
+                </Grid>
+              )}
+            </Box>
+          </Form>
         </Await>
       </Suspense>
     </>

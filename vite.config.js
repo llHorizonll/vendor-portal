@@ -8,7 +8,7 @@ const __dirname = path.resolve();
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react({ fastRefresh: false }),
+    react({ fastRefresh: true }),
     //basicSsl(),
     VitePWA({
       registerType: "autoUpdate", // add this to cache all the imports

@@ -62,10 +62,10 @@ const ViewContact = () => {
 
   return (
     <>
-      <BoxHeader title={t("pages.contacts.title")} ButtonElement={MuiButtonGroup} />
+      <BoxHeader title={t("pages.contacts.title")} parentPath="/contacts" ButtonElement={MuiButtonGroup} />
       <Suspense fallback={<small>Loading Comments...</small>}>
         <Await resolve={contact}>
-          <Box px={2} sx={{ height: 1080, overflow: "auto" }}>
+          <Box px={2} mb={2}>
             <Grid container spacing={4}>
               <Grid xs={12} md={4} item>
                 <Typography variant="h6" sx={{ textTransform: "uppercase" }}>

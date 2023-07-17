@@ -22,7 +22,7 @@ export const ProtectedLayout = () => {
         <Box
           component="main"
           sx={{
-            width: "100%",
+            width: isOpenSideBar ? `calc(100% - ${drawerWidth}px)` : "100%",
           }}
         >
           <Toolbar />

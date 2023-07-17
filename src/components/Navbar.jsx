@@ -1,11 +1,26 @@
 import { useState, useContext } from "react";
-import { AppBar, Box, Toolbar, Typography, Menu, MenuItem, Icon, IconButton } from "@mui/material";
+import {
+  AppBar,
+  Box,
+  Toolbar,
+  Typography,
+  Menu,
+  MenuItem,
+  Icon,
+  IconButton,
+  Divider,
+  ListItemIcon,
+  ListItemText,
+  MenuList,
+} from "@mui/material";
 import { useAuth } from "@/hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 import { DarkModeOutlined, LightModeOutlined } from "@mui/icons-material";
 import { ColorModeContext } from "@/utils/themes";
 import PropTypes from "prop-types";
 
 export default function Navbar({ isOpenSideBar, setOpenSideBar }) {
+  const navigate = useNavigate();
   const { user, logout } = useAuth();
   const { mode, setMode } = useContext(ColorModeContext);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -59,6 +74,7 @@ export default function Navbar({ isOpenSideBar, setOpenSideBar }) {
             >
               {mode === "dark" ? <LightModeOutlined /> : <DarkModeOutlined />}
             </IconButton>
+
             <Menu
               id="menu-appbar"
               anchorEl={anchorEl}
@@ -74,14 +90,49 @@ export default function Navbar({ isOpenSideBar, setOpenSideBar }) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem sx={{ padding: "4px 20px" }} onClick={handleClose}>
+              <div style={{ padding: 20 }}>alma.lawson@example.com</div>
+
+              <Divider />
+              <MenuList>
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon sx={{ marginRight: 2 }}>
+                    <Icon>account_box</Icon>
+                  </ListItemIcon>
+                  <ListItemText primary={"Profile"} />
+                </MenuItem>
+                <MenuItem
+                  onClick={() => {
+                    navigate("/settings");
+                    handleClose();
+                  }}
+                >
+                  <ListItemIcon sx={{ marginRight: 2 }}>
+                    <Icon>settings</Icon>
+                  </ListItemIcon>
+                  <ListItemText primary={"Settings"} />
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon sx={{ marginRight: 2 }}>
+                    <Icon>help_center</Icon>
+                  </ListItemIcon>
+                  <ListItemText primary={"Help"} />
+                </MenuItem>
+                <MenuItem onClick={logout}>
+                  <ListItemIcon sx={{ marginRight: 2 }}>
+                    <Icon>logout</Icon>
+                  </ListItemIcon>
+                  <ListItemText primary={"Log out"} />
+                </MenuItem>
+              </MenuList>
+
+              {/* <MenuItem sx={{ padding: "4px 20px" }} onClick={handleClose}>
                 {" "}
                 <Icon sx={{ marginRight: 2 }}>account_box</Icon> Profile
               </MenuItem>
               <MenuItem sx={{ padding: "4px 20px" }} onClick={logout}>
                 {" "}
                 <Icon sx={{ marginRight: 2 }}>logout</Icon> Logout
-              </MenuItem>
+              </MenuItem> */}
             </Menu>
           </div>
         </Toolbar>

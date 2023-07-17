@@ -1,42 +1,27 @@
 import PropTypes from "prop-types";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef } from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
 import uploadImg from "../assets/cloud-upload.png";
-import png from "../assets/png.png";
-import jpg from "../assets/jpg.png";
-import svg from "../assets/svg.png";
-import defaultImage from "../assets/default.png";
-import jpeg from "../assets/jpeg.png";
-
-const ImageConfig = {
-  png,
-  jpg,
-  svg,
-  "svg+xml": svg,
-  default: defaultImage,
-  jpeg,
-};
+import { useTheme } from "@mui/material/styles";
 
 const CustomBox = styled(Box)({
   "&.MuiBox-root": {
     backgroundColor: "#fff",
     borderRadius: "2rem",
     boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-    padding: "1rem",
+    padding: "0.5rem",
   },
   "&.MuiBox-root:hover, &.MuiBox-root.dragover": {
     opacity: 0.6,
   },
 });
 
-const ImageUpload = ({ limit, multiple, name }) => {
+const ImageUpload = ({ fileList, setFileList, limit, name, notShowList }) => {
+  const theme = useTheme();
   // 👇 State with useState()
-  const [singleFile, setSingleFile] = useState([]);
-  const [fileList, setFileList] = useState([]);
   const wrapperRef = useRef(null);
-
   // 👇 Toggle the dragover class
   const onDragEnter = () => wrapperRef.current?.classList.add("dragover");
   const onDragLeave = () => wrapperRef.current?.classList.remove("dragover");
@@ -46,25 +31,16 @@ const ImageUpload = ({ limit, multiple, name }) => {
     (e) => {
       const target = e.target;
       if (!target.files) return;
-
-      if (limit === 1) {
-        const newFile = Object.values(target.files).map((file) => file);
-        if (singleFile.length >= 1) return alert("Only a single image allowed");
-        setSingleFile(newFile);
-      }
-
-      if (multiple) {
-        const newFiles = Object.values(target.files).map((file) => file);
-        if (newFiles) {
-          const updatedList = [...fileList, ...newFiles];
-          if (updatedList.length > limit || newFiles.length > 3) {
-            return alert(`Image must not be more than ${limit}`);
-          }
-          setFileList(updatedList);
+      const newFiles = Object.values(target.files).map((file) => URL.createObjectURL(file));
+      if (newFiles) {
+        const updatedList = [...fileList, ...newFiles];
+        if (updatedList.length > limit || newFiles.length > 3) {
+          return alert(`Image must not be more than ${limit}`);
         }
+        setFileList(updatedList);
       }
     },
-    [fileList, limit, multiple, singleFile]
+    [fileList, setFileList, limit]
   );
 
   // 👇 remove multiple images
@@ -72,16 +48,6 @@ const ImageUpload = ({ limit, multiple, name }) => {
     const updatedList = [...fileList];
     updatedList.splice(fileList.indexOf(file), 1);
     setFileList(updatedList);
-  };
-
-  // 👇 remove single image
-  const fileSingleRemove = () => {
-    setSingleFile([]);
-  };
-
-  // 👇 Calculate Size in KiloByte and MegaByte
-  const calcSize = (size) => {
-    return size < 1000000 ? `${Math.floor(size / 1000)} KB` : `${Math.floor(size / 1000000)} MB`;
   };
 
   // 👇 Actual JSX
@@ -98,6 +64,7 @@ const ImageUpload = ({ limit, multiple, name }) => {
             height: "13rem",
             border: "2px dashed #4267b2",
             borderRadius: "20px",
+            backgroundColor: theme.palette.background.default,
           }}
           ref={wrapperRef}
           onDragEnter={onDragEnter}
@@ -122,7 +89,7 @@ const ImageUpload = ({ limit, multiple, name }) => {
             type="file"
             name={name}
             onChange={onFileDrop}
-            multiple={multiple}
+            multiple
             accept="image/jpg, image/png, image/jpeg"
             style={{
               opacity: 0,
@@ -138,23 +105,23 @@ const ImageUpload = ({ limit, multiple, name }) => {
       </CustomBox>
 
       {/* 👇Image Preview 👇 */}
-      {fileList.length > 0 || singleFile.length > 0 ? (
+      {fileList.length > 0 && !notShowList ? (
         <Stack spacing={2} sx={{ my: 2 }}>
-          {(multiple ? fileList : singleFile).map((item, index) => {
-            const imageType = item.type.split("/")[1];
+          {fileList.map((item, index) => {
             return (
               <Box
                 key={index}
                 sx={{
                   position: "relative",
                   backgroundColor: "#f5f8ff",
+                  color: theme.palette.mode === "dark" ? theme.palette.background.default : theme.palette.text.default,
                   borderRadius: 1.5,
                   p: 0.5,
                 }}
               >
                 <Box display="flex">
                   <img
-                    src={ImageConfig[`${imageType}`] || ImageConfig["default"]}
+                    src={item}
                     alt="upload"
                     style={{
                       height: "3.5rem",
@@ -163,16 +130,12 @@ const ImageUpload = ({ limit, multiple, name }) => {
                   />
                   <Box sx={{ ml: 1 }}>
                     <Typography>{item.name}</Typography>
-                    <Typography variant="body2">{calcSize(item.size)}</Typography>
+                    <Typography variant="body2">image {index + 1}</Typography>
                   </Box>
                 </Box>
                 <IconButton
                   onClick={() => {
-                    if (multiple) {
-                      fileRemove(item);
-                    } else {
-                      fileSingleRemove();
-                    }
+                    fileRemove(item);
                   }}
                   sx={{
                     color: "#df2c0e",
@@ -196,7 +159,9 @@ const ImageUpload = ({ limit, multiple, name }) => {
 export default ImageUpload;
 
 ImageUpload.propTypes = {
+  fileList: PropTypes.array,
+  setFileList: PropTypes.func,
   limit: PropTypes.number,
-  multiple: PropTypes.bool,
   name: PropTypes.string,
+  notShowList: PropTypes.bool,
 };

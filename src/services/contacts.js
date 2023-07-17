@@ -26,6 +26,7 @@ export async function getContactsById({ params }) {
     return defer({ contact, params });
   }
 }
+
 export async function updateContact({ request, params }) {
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
