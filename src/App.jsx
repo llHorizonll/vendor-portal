@@ -63,16 +63,8 @@ const App = () => {
 
           {/* <Route path="contacts/:contactId/edit" element={<EditContact />} loader={contactLoader} action={editAction} />
           <Route path="contacts/:contactId/destroy" action={destroyAction} /> */}
-          <Route
-            path="/quotations"
-            element={<Quotations />}
-            loader={async () => await fetch("src/services/contacts.json")}
-          />
-          <Route
-            path="/purchase-order"
-            element={<PurchaseOrder />}
-            loader={async () => await fetch("src/services/contacts.json")}
-          />
+          <Route path="/quotations" element={<Quotations />} />
+          <Route path="/purchase-order" element={<PurchaseOrder />} />
           <Route path="/catalogue" element={<Catalogue />} loader={getProductList} />
           <Route path="catalogue/:catalogueId" element={<ViewCatalogue />} loader={getProductById} />
           <Route
@@ -81,17 +73,9 @@ const App = () => {
             loader={getProductById}
             action={updateProduct}
           />
-          <Route
-            path="/price-lists"
-            element={<PriceLists />}
-            loader={async () => await fetch("src/services/contacts.json")}
-          />
-          <Route
-            path="/settings"
-            element={<Settings />}
-            loader={async () => await fetch("src/services/contacts.json")}
-          />
-          <Route path="/help" element={<Help />} loader={async () => await fetch("src/services/contacts.json")} />
+          <Route path="/price-lists" element={<PriceLists />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/help" element={<Help />} />
         </Route>
       </Route>
     )

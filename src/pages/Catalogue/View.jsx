@@ -2,7 +2,7 @@
 import { Suspense, useState } from "react";
 import { useNavigate, useLoaderData, Await } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ToggleButton, ToggleButtonGroup, Icon, Grid, Box, Typography, Avatar, Chip, TextField } from "@mui/material";
+import { ToggleButton, ToggleButtonGroup, Icon, Grid, Box, Typography, TextField } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -64,11 +64,11 @@ const ViewCatalogue = () => {
   return (
     <>
       <BoxHeader title={t("pages.catalogue.title")} parentPath="/catalogue" ButtonElement={MuiButtonGroup} />
-      <Suspense fallback={<small>Loading Comments...</small>}>
+      <Suspense fallback={<small>Loading Product...</small>}>
         <Await resolve={product}>
           <Box px={2}>
             <Grid container spacing={2}>
-              <Grid xs={12} item>
+              <Grid xs={12} sm={6} item>
                 <Box pt={2} sx={{ border: "1px solid rgba(0, 0, 0, 0.38)", borderRadius: 4 }}>
                   <swiper-container
                     navigation="true"
@@ -86,92 +86,96 @@ const ViewCatalogue = () => {
                   </swiper-container>
                 </Box>
               </Grid>
-              <Grid xs={12} item>
-                <TextField
-                  size="small"
-                  label="Name"
-                  fullWidth
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                />
-              </Grid>
-              <Grid xs={12} md={6} item>
-                <TextField
-                  size="small"
-                  label="Name"
-                  fullWidth
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                />
-              </Grid>
-              <Grid xs={12} md={6} item>
-                <TextField
-                  size="small"
-                  label="Name"
-                  fullWidth
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                />
-              </Grid>
-              <Grid xs={12} md={6} item>
-                <TextField
-                  size="small"
-                  label="Name"
-                  fullWidth
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                />
-              </Grid>
-              <Grid xs={12} md={6} item>
-                <TextField
-                  size="small"
-                  label="Name"
-                  fullWidth
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                />
-              </Grid>
-              <Grid xs={12} item>
-                <TextField
-                  size="small"
-                  label="Description"
-                  fullWidth
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  multiline
-                  rows={4}
-                />
-              </Grid>
-              <Grid xs={12} item>
-                <TextField
-                  size="small"
-                  label="Specifications"
-                  fullWidth
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                />
+              <Grid xs={12} sm={6} item>
+                <Grid container spacing={2}>
+                  <Grid xs={12} item>
+                    <TextField
+                      size="small"
+                      label="Product Name"
+                      fullWidth
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </Grid>
+                  <Grid xs={6} item>
+                    <TextField
+                      size="small"
+                      label="Category"
+                      fullWidth
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </Grid>
+                  <Grid xs={6} item>
+                    <TextField
+                      size="small"
+                      label="Unit"
+                      fullWidth
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </Grid>
+                  <Grid xs={6} item>
+                    <TextField
+                      size="small"
+                      label="SKU"
+                      fullWidth
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </Grid>
+                  <Grid xs={6} item>
+                    <TextField
+                      size="small"
+                      label="Brand"
+                      fullWidth
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </Grid>
+                  <Grid xs={12} item>
+                    <TextField
+                      size="small"
+                      label="Tags"
+                      fullWidth
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  </Grid>
+                </Grid>
+                <Box mt={1} mb={2}>
+                  <Accordion defaultExpanded>
+                    <AccordionSummary expandIcon={<Icon>expand_more</Icon>} aria-controls="packaging-content">
+                      <Typography>Packaging</Typography>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit
+                        amet blandit leo lobortis eget.
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                </Box>
+                <Grid xs={12} item>
+                  <TextField
+                    size="small"
+                    label="Description"
+                    fullWidth
+                    multiline
+                    rows={4}
+                    InputProps={{
+                      readOnly: true,
+                    }}
+                  />
+                </Grid>
               </Grid>
             </Grid>
-            <Box mt={1} mb={2}>
-              <Accordion defaultExpanded>
-                <AccordionSummary expandIcon={<Icon>expand_more</Icon>} aria-controls="packaging-content">
-                  <Typography>Packaging</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex, sit amet
-                    blandit leo lobortis eget.
-                  </Typography>
-                </AccordionDetails>
-              </Accordion>
-            </Box>
           </Box>
         </Await>
       </Suspense>

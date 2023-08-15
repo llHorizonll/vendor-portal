@@ -97,7 +97,7 @@ const EditContact = () => {
 
   return (
     <>
-      <BoxHeader title={t("pages.contacts.title")} ButtonElement={MuiButtonGroup} />
+      <BoxHeader title={t("pages.contacts.title")} parentPath="/contacts" ButtonElement={MuiButtonGroup} />
       <Suspense fallback={<small>Loading Comments...</small>}>
         <Await resolve={contact}>
           <Form method="post" action="/contacts" onSubmit={handleSubmit(onSubmit)}>

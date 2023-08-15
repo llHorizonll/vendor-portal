@@ -33,7 +33,7 @@ export default function Sidebar({ drawerWidth, isOpenSideBar, setOpenSideBar }) 
           </ListItem>
         ))}
       </List>
-      <Divider />
+      {/* <Divider />
       <List>
       <ListItem disablePadding>
           <ListItemButton component={NavLink} to={"/settings"} selected={"/settings" === location.pathname}>
@@ -59,7 +59,7 @@ export default function Sidebar({ drawerWidth, isOpenSideBar, setOpenSideBar }) 
             <ListItemText primary={"Log out"} />
           </ListItemButton>
         </ListItem>
-      </List>
+      </List> */}
     </div>
   );
 
@@ -78,7 +78,7 @@ export default function Sidebar({ drawerWidth, isOpenSideBar, setOpenSideBar }) 
           keepMounted: true, // Better open performance on mobile.
         }}
         sx={{
-          display: { xs: "block", sm: "none" },
+          display: { xs: "block", md: "none" },
           "& .MuiDrawer-paper": { boxSizing: "border-box", width: drawerWidth },
         }}
       >
@@ -87,7 +87,7 @@ export default function Sidebar({ drawerWidth, isOpenSideBar, setOpenSideBar }) 
       <Drawer
         variant="permanent"
         sx={{
-          display: { xs: "none", sm: "block" },
+          display: { xs: "none", md: "block" },
           "& .MuiDrawer-paper": { boxSizing: "border-box", width: isOpenSideBar ? drawerWidth : 0 },
         }}
       >
