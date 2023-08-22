@@ -58,10 +58,10 @@ export default defineConfig({
   ],
   server: {
     port: 5555,
-    https: {
-      key: "localhost-key.pem",
-      cert: "localhost.pem",
-    },
+    // https: {
+    //   key: "localhost-key.pem",
+    //   cert: "localhost.pem",
+    // },
   },
   resolve: {
     alias: {

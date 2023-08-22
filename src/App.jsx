@@ -24,7 +24,8 @@ import PurchaseOrder from "./pages/PurchaseOrder";
 import Catalogue from "./pages/Catalogue/Catalogue";
 import EditCatalogue from "./pages/Catalogue/Edit";
 import ViewCatalogue from "./pages/Catalogue/View";
-import PriceLists from "./pages/PriceLists";
+import PriceLists from "./pages/PriceList/PriceLists";
+import PriceListDetail from "./pages/PriceList/Details"
 import Settings from "./pages/Settings/Settings";
 import Help from "./pages/Help";
 
@@ -74,6 +75,7 @@ const App = () => {
             action={updateProduct}
           />
           <Route path="/price-lists" element={<PriceLists />} />
+          <Route path="/price-lists/:pricelistId" element={<PriceListDetail />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/help" element={<Help />} />
         </Route>

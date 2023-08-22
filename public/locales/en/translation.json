@@ -132,7 +132,7 @@
     "quotations": {},
     "purchaseOrder": {},
     "catalogue": { "title": "Catalogue" },
-    "pricelist": {},
+    "pricelist": { "title":"PriceList"},
     "setting": {
       "brands": {
         "title": "Brands"
