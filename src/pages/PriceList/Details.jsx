@@ -1,11 +1,6 @@
-import * as React from "react";
 import { useMemo } from "react";
 import { MaterialReactTable } from "material-react-table";
 import { useTranslation } from "react-i18next";
-import FormControl, { useFormControl } from "@mui/material/FormControl";
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
 import { Suspense, useState } from "react";
 import {
   useNavigate,
@@ -15,44 +10,29 @@ import {
   useLocation,
 } from "react-router-dom";
 import {
-  Avatar,
   TextField,
   Box,
   Grid,
-  Card,
-  CardHeader,
-  Chip,
-  IconButton,
-  CardContent,
-  CardActions,
-  Button,
-  Typography,
-  AppBar,
-  Toolbar,
-  Stack,
-  Icon,
-  Container,
-  Paper,
-  Link,
   Divider,
   MenuItem,
   InputLabel,
   Select,
+  FormControl,
 } from "@mui/material";
-import Autocomplete from "@mui/material/Autocomplete";
-import SelectThaiAddress from "../../components/SelectThaiAddress";
 import BoxHeader from "../../components/BoxHeader";
-import listdata from "./data.json";
 
 function Detail() {
-  const { pricelistId } = useParams();
-  const list = listdata.find((data) => data.id === parseInt(pricelistId));
-  console.log(list);
-  const navigate = useNavigate();
-  const [mode, setMode] = useState();
-  const [age, setAge] = React.useState("");
+  // get element by id
+  // const { pricelistId } = useParams();
+  // const card = cardsData.find((cards) => cards.id === (pricelistId));
   const { t } = useTranslation();
-
+  const [mode, setMode] = useState();
+  const navigate = useNavigate();
+  const { pricelist , params} = useLoaderData();
+  const { pricelistId} = params;
+  console.log(pricelist);
+  //Select declare
+  const [age, setAge] = useState("");
   const handleChange = (event) => {
     setAge(event.target.value);
   };
@@ -90,7 +70,7 @@ function Detail() {
         size: 150,
       },
       {
-        accessorKey: "price", //normal accessorKey
+        accessorKey: "price", //access nested data with dot notation
         header: "Price",
       },
     ],
@@ -99,7 +79,7 @@ function Detail() {
 
   return (
     <>
-      <BoxHeader title={t("pages.pricelist.title")} />
+      <BoxHeader title={t("pages.pricelist.title")} parentPath="/price-lists" />
       <Box px={2} mb={2}>
         <Grid container>
           <Grid xs={12} sm={6} item>
@@ -159,7 +139,7 @@ function Detail() {
               </Grid>
               <Grid xs={12} item>
                 <TextField
-                  value={list.id}
+                  value={""}
                   size="small"
                   label="Pricelist name"
                   fullWidth
@@ -171,7 +151,7 @@ function Detail() {
             </Grid>
           </Grid>
           <Divider
-            sx={{ marginInline: 2 }}
+            sx={{ marginX: 5 }}
             orientation="vertical"
             flexItem
           ></Divider>

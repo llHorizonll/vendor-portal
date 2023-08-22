@@ -1,65 +1,59 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useMemo } from "react";
 import { MaterialReactTable } from "material-react-table";
 import { useTranslation } from "react-i18next";
-import { useNavigate, useLoaderData, Link } from "react-router-dom";
+import { useNavigate, useLoaderData } from "react-router-dom";
 import {
-  Avatar,
-  TextField,
-  Box,
   Grid,
   Card,
-  CardHeader,
-  Chip,
-  IconButton,
   CardContent,
-  CardActions,
-  Button,
-  Typography,
+  Chip,
+  Box,
   Toolbar,
   Stack,
-  Icon,
-  Container,
-  Paper,
+  TextField,
+  Typography,
+  Button,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-import CloseIcon from "@mui/icons-material/Close";
+import BoxHeader from "../../components/BoxHeader";
 import { useTheme } from "@mui/material/styles";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import list from "./data.json";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const PriceLists = () => {
+  const { t } = useTranslation();
+  // load data from service
+  const { pricelist } = useLoaderData();
+  const  data  = pricelist;
+  console.log(data);
+
   //List Card PriceList
   const ListCard = () => {
-    const theme = useTheme();
+    // const theme = useTheme();
     // const matchesSm = useMediaQuery(theme.breakpoints.up("sm"));
-    const { t } = useTranslation();
     const navigate = useNavigate();
-    const handleCardClick = (pricelistId) => {
-      navigate(`/price-lists/${pricelistId}`);
-    };
 
     return (
-      <>
-        {list.map((data, index) => {
+      <div>
+        {data.map((card, index) => {
           return (
-            <div key={data.id}>
-              {/* <Link to={`/price-lists/${data.id}`} underline="none"> */}
+            <div key={card.id}>
+              {/* <Link to={`/price-lists/${card.id}`} underline="none"> */}
               <Card
                 sx={{ width: 1, cursor: "pointer" }}
                 onClick={() => {
-                  handleCardClick(data.id);
+                  navigate(card.id);
                 }}
               >
                 <CardContent>
                   <Grid container spacing={0}>
                     <Grid xs={8} item>
                       <Typography sx={{ fontSize: 18 }} gutterBottom>
-                        {data.pricelist_master.name}
+                        {card.pricelist_master.name}
                       </Typography>
                     </Grid>
                     <Grid textAlign="end" xs={4} item>
                       <Typography sx={{ fontSize: 18 }} gutterBottom>
-                        {data.pricelist_master.status}
+                        {card.pricelist_master.status}
                       </Typography>
                     </Grid>
                   </Grid>
@@ -67,15 +61,15 @@ const PriceLists = () => {
                     <Grid xs={8} item>
                       <Grid container>
                         <Typography sx={{ fontSize: 14 }} gutterBottom>
-                          {data.pricelist_master.vendor_id}
+                          {card.pricelist_master.vendor_id}
                         </Typography>
                         <Typography
                           sx={{ fontSize: 14, marginLeft: "20px" }}
                           gutterBottom
                         >
-                          {data.pricelist_master.start_date +
+                          {card.pricelist_master.start_date +
                             " - " +
-                            data.pricelist_master.end_date}
+                            card.pricelist_master.end_date}
                         </Typography>
                       </Grid>
                     </Grid>
@@ -94,12 +88,13 @@ const PriceLists = () => {
             </div>
           );
         })}
-      </>
+      </div>
     );
   };
 
   return (
     <>
+      <BoxHeader title={t("pages.pricelist.title")} />
       <Grid width={1} position={"fixed"}>
         <Box width={1} sx={{ margin: 0, padding: 0 }}>
           <Box width={1} sx={{ backgroundColor: "#D8D9DA", top: 0 }}>
@@ -109,7 +104,7 @@ const PriceLists = () => {
                 sx={{ backgroundColor: "#fff", borderRadius: 10, px: 1 }}
               >
                 <Stack direction={"row"}>
-                  <SearchIcon sx={{ marginTop: 0.5, color: "#D8D9DA" }} />
+                  {/* <SearchIcon sx={{ marginTop: 0.5, color: "#D8D9DA" }} /> */}
                   <TextField
                     width={1}
                     id="standard-basic"
@@ -120,13 +115,9 @@ const PriceLists = () => {
                     }}
                     placeholder="search..."
                   />
-                  <CloseIcon
-                    textAlign={"end"}
-                    sx={{ marginTop: 0.5, color: "#D8D9DA" }}
-                  />
                 </Stack>
               </Box>
-              <FilterListIcon />
+
               <Stack direction="row" spacing={1}>
                 <Typography mx={1} variant="h6" color="initial">
                   Sort:{" "}

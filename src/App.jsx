@@ -1,5 +1,11 @@
 /* eslint-disable react/no-children-prop */
-import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements, defer } from "react-router-dom";
+import {
+  RouterProvider,
+  Route,
+  createBrowserRouter,
+  createRoutesFromElements,
+  defer,
+} from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { ColorModeContextProvider } from "./utils/themes";
 import { ProtectedLayout } from "./layout/ProtectedLayout";
@@ -14,8 +20,16 @@ import RegisterSuccess from "./pages/Register/RegisterSuccess";
 import Dashboard from "./pages/Dashboard";
 import HomeLayout from "./layout/HomeLayout";
 import ResetPassword from "./pages/ResetPassword";
-import { getContactsList, getContactsById, updateContact } from "./services/contacts";
-import { getProductList, getProductById, updateProduct } from "./services/products";
+import {
+  getContactsList,
+  getContactsById,
+  updateContact,
+} from "./services/contacts";
+import {
+  getProductList,
+  getProductById,
+  updateProduct,
+} from "./services/products";
 import Contacts from "./pages/Contacts/Contacts";
 import ViewContact from "./pages/Contacts/View";
 import EditContact from "./pages/Contacts/Edit";
@@ -25,7 +39,8 @@ import Catalogue from "./pages/Catalogue/Catalogue";
 import EditCatalogue from "./pages/Catalogue/Edit";
 import ViewCatalogue from "./pages/Catalogue/View";
 import PriceLists from "./pages/PriceList/PriceLists";
-import PriceListDetail from "./pages/PriceList/Details"
+import PriceListDetail from "./pages/PriceList/Details";
+import { getPriceLists, getPriceListsById } from "./services/pricelist";
 import Settings from "./pages/Settings/Settings";
 import Help from "./pages/Help";
 
@@ -40,7 +55,10 @@ const getUserData = () =>
 const App = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={<AuthLayout />} loader={() => defer({ userPromise: getUserData() })}>
+      <Route
+        element={<AuthLayout />}
+        loader={() => defer({ userPromise: getUserData() })}
+      >
         <Route element={<HomeLayout />}>
           <Route path="register" element={<RegisterCompany />} />
           <Route path="register2" element={<RegisterUser />} />
@@ -52,9 +70,21 @@ const App = () => {
         <Route path="register/success" element={<RegisterSuccess />} />
 
         <Route path="/" element={<ProtectedLayout />}>
-          <Route index element={<Dashboard />} loader={async () => await fetch("src/services/dashboard.json")} />
-          <Route path="contacts" element={<Contacts />} loader={getContactsList} />
-          <Route path="contacts/:contactId" element={<ViewContact />} loader={getContactsById} />
+          <Route
+            index
+            element={<Dashboard />}
+            loader={async () => await fetch("src/services/dashboard.json")}
+          />
+          <Route
+            path="contacts"
+            element={<Contacts />}
+            loader={getContactsList}
+          />
+          <Route
+            path="contacts/:contactId"
+            element={<ViewContact />}
+            loader={getContactsById}
+          />
           <Route
             path="contacts/:contactId/edit"
             element={<EditContact />}
@@ -66,16 +96,32 @@ const App = () => {
           <Route path="contacts/:contactId/destroy" action={destroyAction} /> */}
           <Route path="/quotations" element={<Quotations />} />
           <Route path="/purchase-order" element={<PurchaseOrder />} />
-          <Route path="/catalogue" element={<Catalogue />} loader={getProductList} />
-          <Route path="catalogue/:catalogueId" element={<ViewCatalogue />} loader={getProductById} />
+          <Route
+            path="/catalogue"
+            element={<Catalogue />}
+            loader={getProductList}
+          />
+          <Route
+            path="catalogue/:catalogueId"
+            element={<ViewCatalogue />}
+            loader={getProductById}
+          />
           <Route
             path="catalogue/:catalogueId/edit"
             element={<EditCatalogue />}
             loader={getProductById}
             action={updateProduct}
           />
-          <Route path="/price-lists" element={<PriceLists />} />
-          <Route path="/price-lists/:pricelistId" element={<PriceListDetail />} />
+          <Route
+            path="/price-lists"
+            element={<PriceLists />}
+            loader={getPriceLists}
+          />
+          <Route
+            path="/price-lists/:pricelistId"
+            element={<PriceListDetail />}
+            loader={getPriceListsById}
+          />
           <Route path="/settings" element={<Settings />} />
           <Route path="/help" element={<Help />} />
         </Route>

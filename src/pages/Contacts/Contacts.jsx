@@ -3,7 +3,6 @@ import { useMemo } from "react";
 import { MaterialReactTable } from "material-react-table";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLoaderData } from "react-router-dom";
-import FilterlistBox from "../../components/FilterBox";
 import { Avatar, Grid, Card, CardHeader, Chip } from "@mui/material";
 import BoxHeader from "../../components/BoxHeader";
 import { useTheme } from "@mui/material/styles";
@@ -40,7 +39,7 @@ const Contacts = () => {
   return (
     <>
       <BoxHeader title={t("pages.contacts.title")} />
-      {!matchesSm && <FilterlistBox noFilter={true} />}
+     
 
       {matchesSm && (
         <MaterialReactTable
@@ -75,7 +74,7 @@ const Contacts = () => {
                   }
                   action={
                     <Chip
-                      label={index % 2 === 0 ? "Acitve" : "Inactive"}
+                      label={index % 2 === 0 ? "Active" : "Inactive"}
                       color={index % 2 === 0 ? "success" : "error"}
                     />
                   }
