@@ -7,7 +7,7 @@ export function getPriceLists() {
 }
 //mock api get data price-list by Id
 export function getPriceListsById({ params }) {
-  const pricelistId = data.find((params) => params.id === params.pricelistId);
-  const pricelist = pricelistId;
+  // Assuming "data" is an array containing price list objects
+  const pricelist = data.find(item => item.id === params.pricelistId);
   return { pricelist, params };
 }

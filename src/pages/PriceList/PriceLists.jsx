@@ -20,11 +20,67 @@ import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const PriceLists = () => {
+  const theme = useTheme();
+  const matchesSm = useMediaQuery(theme.breakpoints.up("sm"));
   const { t } = useTranslation();
+  const navigate = useNavigate();
   // load data from service
   const { pricelist } = useLoaderData();
-  const  data  = pricelist;
+  const data = pricelist;
   console.log(data);
+
+  const columns = useMemo(
+    () => [
+      {
+        accessorKey: "pricelist_master.name",
+        id: "a",
+        header: "Pricelist name",
+      },
+      {
+        accessorKey: "pricelist_master.list",
+        header: "List #",
+        id: "b",
+      },
+      {
+        accessorFn: (row) =>
+          `${row.pricelist_master.start_date} ${row.pricelist_master.end_date}`,
+        // accessorKey: "pricelist_master.start_date",
+        id: "c",
+        header: "Valid date",
+      },
+      {
+        accessorKey: "pricelist_master.vendor_id",
+        id: "d",
+        header: "Revision",
+      },
+      {
+        accessorKey: "pricelist_master.status",
+        id: "e",
+        header: "Status",
+        Cell: ({ cell }) => (
+          <Box
+            component={"span"}
+            sx={(theme) => ({
+              backgroundColor:
+                cell.getValue() === "draft"
+                  ? "#EF5350"
+                  : cell.getValue() === "publish"
+                  ? theme.palette.success.dark
+                  : theme.palette.warning.dark,
+              borderRadius: "2rem",
+              color: "#fff",
+              maxWidth: "9ch",
+              width: "50px",
+              p: "8px",
+            })}
+          >
+            {cell.getValue()}
+          </Box>
+        ),
+      },
+    ],
+    []
+  );
 
   //List Card PriceList
   const ListCard = () => {
@@ -95,7 +151,7 @@ const PriceLists = () => {
   return (
     <>
       <BoxHeader title={t("pages.pricelist.title")} />
-      <Grid width={1} position={"fixed"}>
+      {/* <Grid width={1} position={"fixed"}>
         <Box width={1} sx={{ margin: 0, padding: 0 }}>
           <Box width={1} sx={{ backgroundColor: "#D8D9DA", top: 0 }}>
             <Toolbar>
@@ -104,7 +160,7 @@ const PriceLists = () => {
                 sx={{ backgroundColor: "#fff", borderRadius: 10, px: 1 }}
               >
                 <Stack direction={"row"}>
-                  {/* <SearchIcon sx={{ marginTop: 0.5, color: "#D8D9DA" }} /> */}
+                  <SearchIcon sx={{ marginTop: 0.5, color: "#D8D9DA" }} />
                   <TextField
                     width={1}
                     id="standard-basic"
@@ -136,9 +192,9 @@ const PriceLists = () => {
               </Button>
             </Toolbar>
           </Box>
-        </Box>
-        {/* Blue card */}
-        <Grid width={1}>
+        </Box> */}
+      {/* Blue card */}
+      {/* <Grid width={1}>
           <Card sx={{ width: 1, backgroundColor: "#E3F2FD" }}>
             <CardContent>
               <Grid container spacing={0}>
@@ -194,10 +250,26 @@ const PriceLists = () => {
             </CardContent>
           </Card>
         </Grid>
-      </Grid>
-      <Box mt={21}>
-        <ListCard />
-      </Box>
+      </Grid> */}
+      <MaterialReactTable
+        columns={columns}
+        data={data}
+        state={{ isLoading: !data }}
+        muiTableBodyRowProps={({ row }) => ({
+          onClick: () => {
+            navigate(row.original.id);
+
+            console.log(row);
+          },
+          sx: {
+            cursor: "pointer",
+          },
+        })}
+        enableDensityToggle
+       
+      />
+
+      {/* <ListCard /> */}
     </>
   );
 };

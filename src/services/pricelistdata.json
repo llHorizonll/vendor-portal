@@ -35,14 +35,14 @@
             "name": "Summer Sale 2023",
             "start_date": "2023-07-01",
             "end_date": "2023-07-31",
-            "status": "draft",
+            "status": "publish",
             "create_date": "2023-06-28",
             "list" : "231001",
             "items": [
                 {
                     "item_id": "1",
                     "product_id": "1",
-                    "bulk_quantity": 100,
+                    "bulk_quantity": 200,
                     "price": "25.99",
                     "unit_id": "1",
                     "discount_percentage": "10",
@@ -201,5 +201,122 @@
             "user_id": "1",
             "vendor_id": "1"
         }
+    },
+    {
+        "id": "8",
+        "message": "Pricelist Master created successfully.",
+        "pricelist_master": {
+            "name": "Summer Sale 2023",
+            "start_date": "2023-07-01",
+            "end_date": "2023-07-31",
+            "status": "draft",
+            "create_date": "2023-06-28",
+            "list" : "231001",
+            "items": [
+                {
+                    "item_id": "1",
+                    "product_id": "1",
+                    "bulk_quantity": 100,
+                    "price": "25.99",
+                    "unit_id": "1",
+                    "discount_percentage": "10",
+                    "discount_amount": "2.59",
+                    "user_id": "1",
+                    "create_date": "2023-06-28",
+                    "modify_date": "2023-06-28"
+                }
+            ],
+            "revisions": [],
+            "user_id": "1",
+            "vendor_id": "1"
+        }
+    },
+    {
+        "id": "9",
+        "message": "Pricelist Master created successfully.",
+        "pricelist_master": {
+            "name": "Summer Sale 2023",
+            "start_date": "2023-07-01",
+            "end_date": "2023-07-31",
+            "status": "draft",
+            "create_date": "2023-06-28",
+            "list" : "231001",
+            "items": [
+                {
+                    "item_id": "1",
+                    "product_id": "1",
+                    "bulk_quantity": 100,
+                    "price": "25.99",
+                    "unit_id": "1",
+                    "discount_percentage": "10",
+                    "discount_amount": "2.59",
+                    "user_id": "1",
+                    "create_date": "2023-06-28",
+                    "modify_date": "2023-06-28"
+                }
+            ],
+            "revisions": [],
+            "user_id": "1",
+            "vendor_id": "1"
+        }
+    },
+    {
+        "id": "10",
+        "message": "Pricelist Master created successfully.",
+        "pricelist_master": {
+            "name": "Summer Sale 2023",
+            "start_date": "2023-07-01",
+            "end_date": "2023-07-31",
+            "status": "draft",
+            "create_date": "2023-06-28",
+            "list" : "231001",
+            "items": [
+                {
+                    "item_id": "1",
+                    "product_id": "1",
+                    "bulk_quantity": 100,
+                    "price": "25.99",
+                    "unit_id": "1",
+                    "discount_percentage": "10",
+                    "discount_amount": "2.59",
+                    "user_id": "1",
+                    "create_date": "2023-06-28",
+                    "modify_date": "2023-06-28"
+                }
+            ],
+            "revisions": [],
+            "user_id": "1",
+            "vendor_id": "1"
+        }
+    },
+    {
+        "id": "11",
+        "message": "Pricelist Master created successfully.",
+        "pricelist_master": {
+            "name": "Summer Sale 2023",
+            "start_date": "2023-07-01",
+            "end_date": "2023-07-31",
+            "status": "draft",
+            "create_date": "2023-06-28",
+            "list" : "231001",
+            "items": [
+                {
+                    "item_id": "1",
+                    "product_id": "1",
+                    "bulk_quantity": 100,
+                    "price": "25.99",
+                    "unit_id": "1",
+                    "discount_percentage": "10",
+                    "discount_amount": "2.59",
+                    "user_id": "1",
+                    "create_date": "2023-06-28",
+                    "modify_date": "2023-06-28"
+                }
+            ],
+            "revisions": [],
+            "user_id": "1",
+            "vendor_id": "1"
+        }
     }
+
 ]

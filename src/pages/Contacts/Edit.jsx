@@ -1,8 +1,23 @@
 /* eslint-disable react-refresh/only-export-components */
 import { Suspense, useState } from "react";
-import { Form, useSubmit, useNavigate, useLoaderData, Await } from "react-router-dom";
+import {
+  Form,
+  useSubmit,
+  useNavigate,
+  useLoaderData,
+  Await,
+} from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import { ToggleButton, ToggleButtonGroup, Icon, Grid, TextField, Box, Typography, Button } from "@mui/material";
+import {
+  ToggleButton,
+  ToggleButtonGroup,
+  Icon,
+  Grid,
+  TextField,
+  Box,
+  Typography,
+  Button,
+} from "@mui/material";
 import Autocomplete, { createFilterOptions } from "@mui/material/Autocomplete";
 import { useForm, Controller } from "react-hook-form";
 import BoxHeader from "../../components/BoxHeader";
@@ -48,7 +63,7 @@ const EditContact = () => {
   const onSubmit = async (formData) => {
     console.log(formData);
 
-    //should be send formData but test dummydata contacts
+    //should be send formData but test dummy data contacts
     // await createOrUpdateContact(contact, contactId);
     submit(contact, {
       method: "put",
@@ -97,10 +112,18 @@ const EditContact = () => {
 
   return (
     <>
-      <BoxHeader title={t("pages.contacts.title")} parentPath="/contacts" ButtonElement={MuiButtonGroup} />
+      <BoxHeader
+        title={t("pages.contacts.title")}
+        parentPath="/contacts"
+        ButtonElement={MuiButtonGroup}
+      />
       <Suspense fallback={<small>Loading Comments...</small>}>
         <Await resolve={contact}>
-          <Form method="post" action="/contacts" onSubmit={handleSubmit(onSubmit)}>
+          <Form
+            method="post"
+            action="/contacts"
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <Box px={2}>
               <Grid container spacing={4}>
                 <Grid xs={12} md={4} item>
@@ -112,53 +135,105 @@ const EditContact = () => {
                       <Controller
                         name="company"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Company" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Company"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} item>
                       <Controller
                         name="alias"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Alias" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Alias"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} item>
                       <Controller
                         name="email"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Email" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Email"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} item>
                       <Controller
                         name="phone"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Phone" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Phone"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} item>
                       <Controller
                         name="taxId"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Tax ID" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Tax ID"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} sm={6} item>
                       <Controller
                         name="branch"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Branch" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Branch"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} sm={6} item>
                       <Controller
                         name="businessId"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Business ID" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Business ID"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                   </Grid>
-                  <Typography variant="h6" sx={{ mt: 2, textTransform: "uppercase" }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ mt: 2, textTransform: "uppercase" }}
+                  >
                     Address
                   </Typography>
                   <Grid container spacing={1} my={1}>
@@ -166,14 +241,28 @@ const EditContact = () => {
                       <Controller
                         name="address1"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Address #1" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Address #1"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} item>
                       <Controller
                         name="address2"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Address #2" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Address #2"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} sm={6} item>
@@ -256,12 +345,22 @@ const EditContact = () => {
                         name="remark"
                         control={control}
                         render={({ field }) => (
-                          <TextField size="small" label="Remark" fullWidth {...field} rows={11.4} multiline />
+                          <TextField
+                            size="small"
+                            label="Remark"
+                            fullWidth
+                            {...field}
+                            rows={11.4}
+                            multiline
+                          />
                         )}
                       />
                     </Grid>
                   </Grid>
-                  <Typography variant="h6" sx={{ mt: 2, textTransform: "uppercase" }}>
+                  <Typography
+                    variant="h6"
+                    sx={{ mt: 2, textTransform: "uppercase" }}
+                  >
                     TAGS
                   </Typography>
                   <Grid container spacing={1} my={1}>
@@ -289,7 +388,9 @@ const EditContact = () => {
                                 const filtered = filter(options, params);
                                 const { inputValue } = params;
                                 // Suggest the creation of a new value
-                                const isExisting = options.some((option) => inputValue === option.name);
+                                const isExisting = options.some(
+                                  (option) => inputValue === option.name
+                                );
                                 if (inputValue !== "" && !isExisting) {
                                   filtered.push({
                                     inputValue,
@@ -315,9 +416,13 @@ const EditContact = () => {
                                 // Regular option
                                 return option.name;
                               }}
-                              renderOption={(props, option) => <li {...props}>{option.name}</li>}
+                              renderOption={(props, option) => (
+                                <li {...props}>{option.name}</li>
+                              )}
                               freeSolo
-                              renderInput={(params) => <TextField label="Tags" fullWidth {...params} />}
+                              renderInput={(params) => (
+                                <TextField label="Tags" fullWidth {...params} />
+                              )}
                             />
                           );
                         }}
@@ -334,35 +439,65 @@ const EditContact = () => {
                       <Controller
                         name="avatar"
                         control={control}
-                        render={({ field }) => <AvatarUpload width={64} height={64} field={field} />}
+                        render={({ field }) => (
+                          <AvatarUpload width={64} height={64} field={field} />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} item>
                       <Controller
                         name="firstName"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Name" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Name"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} item>
                       <Controller
                         name="title"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Title" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Title"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} item>
                       <Controller
                         name="email"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Email" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Email"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                     <Grid xs={12} item>
                       <Controller
                         name="phone"
                         control={control}
-                        render={({ field }) => <TextField size="small" label="Phone" fullWidth {...field} />}
+                        render={({ field }) => (
+                          <TextField
+                            size="small"
+                            label="Phone"
+                            fullWidth
+                            {...field}
+                          />
+                        )}
                       />
                     </Grid>
                   </Grid>
@@ -373,7 +508,12 @@ const EditContact = () => {
               {mode === "edit" && (
                 <Grid container spacing={2} mt={1} mb={2}>
                   <Grid xs={12} sm={6} md={4} item>
-                    <Button variant="contained" color="primary" type="submit" fullWidth>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      fullWidth
+                    >
                       Save
                     </Button>
                   </Grid>
@@ -382,7 +522,11 @@ const EditContact = () => {
                       variant="contained"
                       color="inherit"
                       fullWidth
-                      onClick={() => (mode === "add" ? navigate("/contacts") : navigate(`/contacts/${contactId}`))}
+                      onClick={() =>
+                        mode === "add"
+                          ? navigate("/contacts")
+                          : navigate(`/contacts/${contactId}`)
+                      }
                     >
                       Cancel
                     </Button>

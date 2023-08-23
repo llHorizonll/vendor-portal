@@ -139,7 +139,7 @@ function Detail() {
               </Grid>
               <Grid xs={12} item>
                 <TextField
-                  value={""}
+                  value={pricelist.pricelist_master.items[0].bulk_quantity}
                   size="small"
                   label="Pricelist name"
                   fullWidth
@@ -193,11 +193,16 @@ function Detail() {
             </Grid>
           </Grid>
         </Grid>
-        <Box mt={2}>
-          <Grid container xs={12} sm={6} item>
-            <TextField id="" label="" />
-          </Grid>
-        </Box>
+       
+      </Box>
+
+      <Box>
+        <MaterialReactTable
+        data={""}
+        columns={columns}>
+          
+
+        </MaterialReactTable>
       </Box>
     </>
   );
