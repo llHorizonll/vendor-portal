@@ -58,7 +58,12 @@ const EditContact = () => {
     },
   });
 
-  const { control, setValue, handleSubmit } = methods;
+  const {
+    control,
+    setValue,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
 
   const onSubmit = async (formData) => {
     console.log(formData);
@@ -135,11 +140,14 @@ const EditContact = () => {
                       <Controller
                         name="company"
                         control={control}
+                        rules={{ required: "require company" }}
                         render={({ field }) => (
                           <TextField
                             size="small"
                             label="Company"
                             fullWidth
+                            error={Boolean(errors.company)}
+                            helperText={errors.company?.message}
                             {...field}
                           />
                         )}
@@ -513,6 +521,7 @@ const EditContact = () => {
                       color="primary"
                       type="submit"
                       fullWidth
+                      disabled={Object.keys(errors).length > 0}
                     >
                       Save
                     </Button>

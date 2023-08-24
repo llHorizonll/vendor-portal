@@ -17,9 +17,13 @@ import {
   MenuItem,
   InputLabel,
   Select,
+  Icon,
   FormControl,
+  ToggleButton,
+  ToggleButtonGroup,
 } from "@mui/material";
 import BoxHeader from "../../components/BoxHeader";
+import { useForm } from "react-hook-form";
 
 function Detail() {
   // get element by id
@@ -28,13 +32,40 @@ function Detail() {
   const { t } = useTranslation();
   const [mode, setMode] = useState();
   const navigate = useNavigate();
-  const { pricelist , params} = useLoaderData();
-  const { pricelistId} = params;
+  const { pricelist, params } = useLoaderData();
+  const { pricelistId } = params;
   console.log(pricelist);
   //Select declare
-  const [age, setAge] = useState("");
+  const [state, setState] = useState("");
   const handleChange = (event) => {
-    setAge(event.target.value);
+    setState(event.target.value);
+  };
+
+  const handleMode = (_, mode) => {
+    if (mode === "edit") {
+      navigate(`/price-lists/${pricelistId}/edit`);
+    }
+    setMode(mode);
+  };
+
+  const ButtonGroup = () => {
+    return (
+      <ToggleButtonGroup
+        size="small"
+        color={mode === "delete" ? "error" : "primary"}
+        value={mode}
+        exclusive
+        onChange={handleMode}
+        aria-label="text alignment"
+      >
+        <ToggleButton value="edit" aria-label="edit">
+          <Icon>edit</Icon>
+        </ToggleButton>
+        <ToggleButton value="delete" aria-label="delete">
+          <Icon>delete</Icon>
+        </ToggleButton>
+      </ToggleButtonGroup>
+    );
   };
 
   const columns = useMemo(
@@ -79,7 +110,11 @@ function Detail() {
 
   return (
     <>
-      <BoxHeader title={t("pages.pricelist.title")} parentPath="/price-lists" />
+      <BoxHeader
+        title={t("pages.pricelist.title")}
+        parentPath="/price-lists"
+        ButtonElement={ButtonGroup}
+      />
       <Box px={2} mb={2}>
         <Grid container>
           <Grid xs={12} sm={6} item>
@@ -122,7 +157,7 @@ function Detail() {
                   <Select
                     labelId="demo-simple-select-autowidth-label"
                     id="demo-simple-select-autowidth"
-                    value={age}
+                    value={state}
                     onChange={handleChange}
                     autoWidth
                     label="Age"
@@ -193,16 +228,10 @@ function Detail() {
             </Grid>
           </Grid>
         </Grid>
-       
       </Box>
 
       <Box>
-        <MaterialReactTable
-        data={""}
-        columns={columns}>
-          
-
-        </MaterialReactTable>
+        <MaterialReactTable data={""} columns={columns}></MaterialReactTable>
       </Box>
     </>
   );

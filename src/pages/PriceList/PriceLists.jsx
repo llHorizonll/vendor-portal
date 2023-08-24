@@ -61,11 +61,12 @@ const PriceLists = () => {
           <Box
             component={"span"}
             sx={(theme) => ({
+           
               backgroundColor:
                 cell.getValue() === "draft"
                   ? "#EF5350"
                   : cell.getValue() === "publish"
-                  ? theme.palette.success.dark
+                  ? "#AED581"
                   : theme.palette.warning.dark,
               borderRadius: "2rem",
               color: "#fff",

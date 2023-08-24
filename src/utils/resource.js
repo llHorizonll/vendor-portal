@@ -29,4 +29,9 @@ export const resource = [
     name: "Price lists",
     icon: "price_change",
   },
+  {
+    path: "/test",
+    name: "Test",
+    icon: "",
+  },
 ];
