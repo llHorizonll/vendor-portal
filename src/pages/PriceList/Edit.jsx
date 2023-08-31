@@ -1,14 +1,14 @@
-import { useMemo } from "react";
-import { MaterialReactTable } from "material-react-table";
+// import { useMemo } from "react";
+// import { MaterialReactTable } from "material-react-table";
 import { useTranslation } from "react-i18next";
-import { Suspense, useState } from "react";
+// import { Suspense, useState } from "react";
 import {
-  useNavigate,
-  useLoaderData,
-  useSubmit,
-  Await,
-  useParams,
-  useLocation,
+  // useNavigate,
+  // useLoaderData,
+  // useSubmit,
+  // Await,
+  // useParams,
+  // useLocation,
   Form,
 } from "react-router-dom";
 import {
@@ -20,10 +20,10 @@ import {
   MenuItem,
   InputLabel,
   Select,
-  Icon,
+  // Icon,
   FormControl,
-  ToggleButton,
-  ToggleButtonGroup,
+  // ToggleButton,
+  // ToggleButtonGroup,
 } from "@mui/material";
 import BoxHeader from "../../components/BoxHeader";
 import { useForm, Controller } from "react-hook-form";
@@ -32,35 +32,35 @@ function Edit() {
   // get element by id
   // const { pricelistId } = useParams();
   // const card = cardsData.find((cards) => cards.id === (pricelistId));
-  const submit = useSubmit();
+  // const submit = useSubmit();
   const { t } = useTranslation();
-  const [mode, setMode] = useState();
-  const navigate = useNavigate();
-  const { pricelist, params } = useLoaderData();
-  const { pricelistId } = params;
-  const newpricelist = [""];
+  // const [mode, setMode] = useState();
+  // const navigate = useNavigate();
+  // const { pricelist, params } = useLoaderData();
+  // const { pricelistId } = params;
+  // const newpricelist = [""];
 
   //Select declare
-  const [state, setState] = useState("");
+  const [status, setStatus] = useState("");
   const handleChange = (event) => {
-    setState(event.target.value);
+    setStatus(event.target.value);
   };
 
-  const handleMode = (_, mode) => {
-    setMode(mode);
-  };
+  // const handleMode = (_, mode) => {
+  //   setMode(mode);
+  // };
 
-  //   const methods = useForm({
-  //     defaultValues: {
-  //       pricelistName: pricelist?.pricelist_master.name,
-  //       list: "",
-  //       revision: "",
-  //       lastUpdate: "",
-  //       dateValid: "",
-  //       till: "",
-  //       issue: "",
-  //     },
-  //   });
+  // const methods = useForm({
+  //   defaultValues: {
+  //     pricelistName: pricelist?.pricelist_master.name,
+  //     list: "",
+  //     revision: "",
+  //     lastUpdate: "",
+  //     dateValid: "",
+  //     till: "",
+  //     issue: "",
+  //   },
+  // });
 
   const {
     control,
@@ -68,77 +68,74 @@ function Edit() {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = ( data) => {
+    // methods.push(fromdata);
     console.log(data);
   };
 
-  const ButtonGroup = () => {
-    return (
-      <ToggleButtonGroup
-        size="small"
-        color={mode === "delete" ? "error" : "primary"}
-        value={mode}
-        exclusive
-        onChange={handleMode}
-        aria-label="text alignment"
-      >
-        <ToggleButton value="edit" aria-label="edit">
-          <Icon>edit</Icon>
-        </ToggleButton>
-        <ToggleButton value="delete" aria-label="delete">
-          <Icon>delete</Icon>
-        </ToggleButton>
-      </ToggleButtonGroup>
-    );
-  };
+  // const ButtonGroup = () => {
+  //   return (
+  //     <ToggleButtonGroup
+  //       size="small"
+  //       color={mode === "delete" ? "error" : "primary"}
+  //       value={mode}
+  //       exclusive
+  //       onChange={handleMode}
+  //       aria-label="text alignment"
+  //     >
+  //       <ToggleButton value="edit" aria-label="edit">
+  //         <Icon>edit</Icon>
+  //       </ToggleButton>
+  //       <ToggleButton value="delete" aria-label="delete">
+  //         <Icon>delete</Icon>
+  //       </ToggleButton>
+  //     </ToggleButtonGroup>
+  //   );
+  // };
 
-  const columns = useMemo(
-    () => [
-      {
-        accessorKey: "sku", //access nested data with dot notation
-        header: "SKU",
-        size: 150,
-      },
-      {
-        accessorKey: "description", //access nested data with dot notation
-        header: "Description",
-        size: 150,
-      },
-      {
-        accessorKey: "min", //access nested data with dot notation
-        header: "Min",
-        size: 150,
-      },
-      {
-        accessorKey: "unit", //access nested data with dot notation
-        header: "Unit",
-        size: 150,
-      },
-      {
-        accessorKey: "retail", //access nested data with dot notation
-        header: "Retail",
-        size: 150,
-      },
-      {
-        accessorKey: "disc_percent", //access nested data with dot notation
-        header: "Disc.%",
-        size: 150,
-      },
-      {
-        accessorKey: "price", //access nested data with dot notation
-        header: "Price",
-      },
-    ],
-    []
-  );
+  // const columns = useMemo(
+  //   () => [
+  //     {
+  //       accessorKey: "sku", //access nested data with dot notation
+  //       header: "SKU",
+  //       size: 150,
+  //     },
+  //     {
+  //       accessorKey: "description", //access nested data with dot notation
+  //       header: "Description",
+  //       size: 150,
+  //     },
+  //     {
+  //       accessorKey: "min", //access nested data with dot notation
+  //       header: "Min",
+  //       size: 150,
+  //     },
+  //     {
+  //       accessorKey: "unit", //access nested data with dot notation
+  //       header: "Unit",
+  //       size: 150,
+  //     },
+  //     {
+  //       accessorKey: "retail", //access nested data with dot notation
+  //       header: "Retail",
+  //       size: 150,
+  //     },
+  //     {
+  //       accessorKey: "disc_percent", //access nested data with dot notation
+  //       header: "Disc.%",
+  //       size: 150,
+  //     },
+  //     {
+  //       accessorKey: "price", //access nested data with dot notation
+  //       header: "Price",
+  //     },
+  //   ],
+  //   []
+  // );
 
   return (
     <>
-      <BoxHeader
-        title={t("pages.pricelist.title")}
-        parentPath="/price-lists"
-       
-      />
+      <BoxHeader title={t("pages.pricelist.title")} parentPath="/price-lists" />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Box px={2} mb={2}>
           <Grid container>
@@ -201,7 +198,7 @@ function Edit() {
                     <Select
                       labelId="demo-simple-select-autowidth-label"
                       id="demo-simple-select-autowidth"
-                      value={state}
+                      value={status}
                       onChange={handleChange}
                       autoWidth
                       label="Age"

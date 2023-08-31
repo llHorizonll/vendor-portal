@@ -33,7 +33,7 @@ import {
 import Contacts from "./pages/Contacts/Contacts";
 import ViewContact from "./pages/Contacts/View";
 import EditContact from "./pages/Contacts/Edit";
-import Quotations from "./pages/Quotations";
+import Quotations from "./pages/Quotation/Quotations";
 import PurchaseOrder from "./pages/PurchaseOrder";
 import Catalogue from "./pages/Catalogue/Catalogue";
 import EditCatalogue from "./pages/Catalogue/Edit";

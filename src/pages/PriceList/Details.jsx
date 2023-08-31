@@ -1,13 +1,13 @@
 import { useMemo } from "react";
 import { MaterialReactTable } from "material-react-table";
 import { useTranslation } from "react-i18next";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import {
   useNavigate,
   useLoaderData,
-  Await,
-  useParams,
-  useLocation,
+  // Await,
+  // useParams,
+  // useLocation,
 } from "react-router-dom";
 import {
   TextField,
@@ -23,7 +23,7 @@ import {
   ToggleButtonGroup,
 } from "@mui/material";
 import BoxHeader from "../../components/BoxHeader";
-import { useForm } from "react-hook-form";
+// import { useForm } from "react-hook-form";
 
 function Detail() {
   // get element by id
@@ -32,9 +32,9 @@ function Detail() {
   const { t } = useTranslation();
   const [mode, setMode] = useState();
   const navigate = useNavigate();
-  const { pricelist, params } = useLoaderData();
-  const { pricelistId } = params;
-  console.log(pricelist);
+  const { params } = useLoaderData();
+  const pricelistId = params;
+
   //Select declare
   const [state, setState] = useState("");
   const handleChange = (event) => {
@@ -174,7 +174,7 @@ function Detail() {
               </Grid>
               <Grid xs={12} item>
                 <TextField
-                  value={pricelist.pricelist_master.items[0].bulk_quantity}
+                  value={""}
                   size="small"
                   label="Pricelist name"
                   fullWidth

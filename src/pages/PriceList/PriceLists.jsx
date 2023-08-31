@@ -4,150 +4,152 @@ import { MaterialReactTable } from "material-react-table";
 import { useTranslation } from "react-i18next";
 import { useNavigate, useLoaderData } from "react-router-dom";
 import {
-  Grid,
-  Card,
-  CardContent,
-  Chip,
+  // Grid,
+  // Card,
+  // CardContent,
+  // Chip,
+  // Toolbar,
+  // Stack,
+  // TextField,
+  // Typography,
+  // Button, 
   Box,
-  Toolbar,
-  Stack,
-  TextField,
-  Typography,
-  Button,
 } from "@mui/material";
 import BoxHeader from "../../components/BoxHeader";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
+// import { useTheme } from "@mui/material/styles";
+// import useMediaQuery from "@mui/material/useMediaQuery";
 
 const PriceLists = () => {
-  const theme = useTheme();
-  const matchesSm = useMediaQuery(theme.breakpoints.up("sm"));
+  // const theme = useTheme();
+  // const matchesSm = useMediaQuery(theme.breakpoints.up("sm"));
   const { t } = useTranslation();
   const navigate = useNavigate();
   // load data from service
-  const { pricelist } = useLoaderData();
+  const pricelist = useLoaderData();
   const data = pricelist;
-  console.log(data);
+
 
   const columns = useMemo(
-    () => [
-      {
-        accessorKey: "pricelist_master.name",
-        id: "a",
-        header: "Pricelist name",
+    () => [{
+      accessorKey: "pricelist_master.list",
+      header: "List #",
+      id: "a",
+    },
+    {
+      accessorKey: "pricelist_master.name",
+      header: "PriceListname",
+      id: "b",
+    },
+    {
+      accessorFn: (row) =>
+        `${row.pricelist_master.start_date} ${row.pricelist_master.end_date}`,
+      // accessorKey: "pricelist_master.start_date",
+      id: "c",
+      header: "Valid date",
+    },
+    {
+      accessorKey: "pricelist_master.vendor_id",
+      id: "d",
+      header: "Revision",
+    },
+    {
+      accessorKey: "pricelist_master.status",
+      id: "e",
+      header: "Status",
+      Cell: (cell) => {
+        return (         
+          <>
+            <Box
+              component={"span"}
+              sx={(theme) => ({
+                backgroundColor:
+                  cell.renderedCellValue === "draft"
+                    ? "#EF5350"
+                    : cell.renderedCellValue === "publish"
+                      ? "#AED581"
+                      : theme.palette.warning.dark,
+                borderRadius: "2rem",
+                color: "#fff",
+                maxWidth: "9ch",
+                width: "50px",
+                p: "8px",
+              })}
+            >
+              {cell.renderedCellValue}
+            </Box>
+          </>
+        )
       },
-      {
-        accessorKey: "pricelist_master.list",
-        header: "List #",
-        id: "b",
-      },
-      {
-        accessorFn: (row) =>
-          `${row.pricelist_master.start_date} ${row.pricelist_master.end_date}`,
-        // accessorKey: "pricelist_master.start_date",
-        id: "c",
-        header: "Valid date",
-      },
-      {
-        accessorKey: "pricelist_master.vendor_id",
-        id: "d",
-        header: "Revision",
-      },
-      {
-        accessorKey: "pricelist_master.status",
-        id: "e",
-        header: "Status",
-        Cell: ({ cell }) => (
-          <Box
-            component={"span"}
-            sx={(theme) => ({
-           
-              backgroundColor:
-                cell.getValue() === "draft"
-                  ? "#EF5350"
-                  : cell.getValue() === "publish"
-                  ? "#AED581"
-                  : theme.palette.warning.dark,
-              borderRadius: "2rem",
-              color: "#fff",
-              maxWidth: "9ch",
-              width: "50px",
-              p: "8px",
-            })}
-          >
-            {cell.getValue()}
-          </Box>
-        ),
-      },
+    },
     ],
     []
   );
 
   //List Card PriceList
-  const ListCard = () => {
-    // const theme = useTheme();
-    // const matchesSm = useMediaQuery(theme.breakpoints.up("sm"));
-    const navigate = useNavigate();
+  // const ListCard = () => {
+  //   // const theme = useTheme();
+  //   // const matchesSm = useMediaQuery(theme.breakpoints.up("sm"));
+  //   const navigate = useNavigate();
 
-    return (
-      <div>
-        {data.map((card, index) => {
-          return (
-            <div key={card.id}>
-              {/* <Link to={`/price-lists/${card.id}`} underline="none"> */}
-              <Card
-                sx={{ width: 1, cursor: "pointer" }}
-                onClick={() => {
-                  navigate(card.id);
-                }}
-              >
-                <CardContent>
-                  <Grid container spacing={0}>
-                    <Grid xs={8} item>
-                      <Typography sx={{ fontSize: 18 }} gutterBottom>
-                        {card.pricelist_master.name}
-                      </Typography>
-                    </Grid>
-                    <Grid textAlign="end" xs={4} item>
-                      <Typography sx={{ fontSize: 18 }} gutterBottom>
-                        {card.pricelist_master.status}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={0}>
-                    <Grid xs={8} item>
-                      <Grid container>
-                        <Typography sx={{ fontSize: 14 }} gutterBottom>
-                          {card.pricelist_master.vendor_id}
-                        </Typography>
-                        <Typography
-                          sx={{ fontSize: 14, marginLeft: "20px" }}
-                          gutterBottom
-                        >
-                          {card.pricelist_master.start_date +
-                            " - " +
-                            card.pricelist_master.end_date}
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                    <Grid textAlign="end" xs={4} item>
-                      <Typography sx={{ fontSize: 14 }} gutterBottom>
-                        <Chip
-                          label={index % 2 === 0 ? "Active" : "Inactive"}
-                          color={index % 2 === 0 ? "success" : "error"}
-                        />
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </CardContent>
-              </Card>
-              {/* </Link> */}
-            </div>
-          );
-        })}
-      </div>
-    );
-  };
+  //   return (
+  //     <div>
+  //       {data.map((card, index) => {
+  //         return (
+  //           <div key={card.id}>
+  //             {/* <Link to={`/price-lists/${card.id}`} underline="none"> */}
+  //             <Card
+  //               sx={{ width: 1, cursor: "pointer" }}
+  //               onClick={() => {
+  //                 navigate(card.id)
+  //               }}
+  //             >
+  //               <CardContent>
+  //                 <Grid container spacing={0}>
+  //                   <Grid xs={8} item>
+  //                     <Typography sx={{ fontSize: 18 }} gutterBottom>
+  //                       {card.pricelist_master.name}
+  //                     </Typography>
+  //                   </Grid>
+  //                   <Grid textAlign="end" xs={4} item>
+  //                     <Typography sx={{ fontSize: 18 }} gutterBottom>
+  //                       {card.pricelist_master.status}
+  //                     </Typography>
+  //                   </Grid>
+  //                 </Grid>
+  //                 <Grid container spacing={0}>
+  //                   <Grid xs={8} item>
+  //                     <Grid container>
+  //                       <Typography sx={{ fontSize: 14 }} gutterBottom>
+  //                         {card.pricelist_master.vendor_id}
+  //                       </Typography>
+  //                       <Typography
+  //                         sx={{ fontSize: 14, marginLeft: "20px" }}
+  //                         gutterBottom
+  //                       >
+  //                         {card.pricelist_master.start_date +
+  //                           " - " +
+  //                           card.pricelist_master.end_date}
+  //                       </Typography>
+  //                     </Grid>
+  //                   </Grid>
+  //                   <Grid textAlign="end" xs={4} item>
+  //                     <Typography sx={{ fontSize: 14 }} gutterBottom>
+  //                       <Chip
+  //                         label={index % 2 === 0 ? "Active" : "Inactive"}
+  //                         color={index % 2 === 0 ? "success" : "error"}
+  //                       />
+  //                     </Typography>
+  //                   </Grid>
+  //                 </Grid>
+  //               </CardContent>
+  //             </Card>
+  //             {/* </Link> */}
+  //           </div>
+  //         );
+  //       })}
+  //     </div>
+  //   );
+  // };
 
   return (
     <>
@@ -258,8 +260,7 @@ const PriceLists = () => {
         state={{ isLoading: !data }}
         muiTableBodyRowProps={({ row }) => ({
           onClick: () => {
-            navigate(row.original.id);
-
+            navigate(row.original.id.toString());
             console.log(row);
           },
           sx: {
@@ -267,7 +268,7 @@ const PriceLists = () => {
           },
         })}
         enableDensityToggle
-       
+
       />
 
       {/* <ListCard /> */}
