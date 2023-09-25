@@ -1,10 +1,10 @@
 // import { useMemo } from "react";
 // import { MaterialReactTable } from "material-react-table";
 import { useTranslation } from "react-i18next";
-// import { Suspense, useState } from "react";
+import { useState } from "react";
 import {
-  // useNavigate,
-  // useLoaderData,
+  useNavigate,
+  useLoaderData,
   // useSubmit,
   // Await,
   // useParams,
@@ -34,11 +34,11 @@ function Edit() {
   // const card = cardsData.find((cards) => cards.id === (pricelistId));
   // const submit = useSubmit();
   const { t } = useTranslation();
-  // const [mode, setMode] = useState();
-  // const navigate = useNavigate();
-  // const { pricelist, params } = useLoaderData();
-  // const { pricelistId } = params;
-  // const newpricelist = [""];
+  const [mode, setMode] = useState();
+  const navigate = useNavigate();
+  const { params } = useLoaderData();
+  const { pricelistId } = params;
+  
 
   //Select declare
   const [status, setStatus] = useState("");
@@ -47,9 +47,9 @@ function Edit() {
   };
 
   // const handleMode = (_, mode) => {
-  //   setMode(mode);
+    
   // };
-
+setMode(mode);
   // const methods = useForm({
   //   defaultValues: {
   //     pricelistName: pricelist?.pricelist_master.name,

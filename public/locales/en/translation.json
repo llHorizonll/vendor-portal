@@ -129,7 +129,7 @@
       "title": "Dashboard"
     },
     "contacts": { "title": "Contacts" },
-    "quotations": {},
+    "quotations": {"title": "Quotations"},
     "purchaseOrder": {},
     "catalogue": { "title": "Catalogue" },
     "pricelist": { "title":"PriceList"},

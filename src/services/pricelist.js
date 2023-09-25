@@ -47,8 +47,8 @@ export function getPriceListsById({ params }) {
   return pricelist, { params };
 }
 
-export function updatePricelists({ req, params }) {
-  const pricelist = data;
-  const formdata = req.formdata();
-  const update = Object.fromEntries(formdata);
-}
+// export function updatePricelists({ req, params }) {
+//   const pricelist = data;
+//   const formdata = req.formdata();
+//   const update = Object.fromEntries(formdata);
+// }

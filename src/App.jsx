@@ -44,7 +44,7 @@ import PricelistEdit from "./pages/PriceList/Edit";
 import { getPriceLists, getPriceListsById } from "./services/pricelist";
 import Settings from "./pages/Settings/Settings";
 import Help from "./pages/Help";
-import Test from "./pages/Test";
+
 
 const getUserData = () =>
   new Promise((resolve) =>
@@ -130,7 +130,7 @@ const App = () => {
             loader={getPriceListsById}
           />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/test" element={<Test />} />
+         
           <Route path="/help" element={<Help />} />
         </Route>
       </Route>
