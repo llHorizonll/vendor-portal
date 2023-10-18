@@ -44,6 +44,7 @@ import PricelistEdit from "./pages/PriceList/Edit";
 import { getPriceLists, getPriceListsById } from "./services/pricelist";
 import Settings from "./pages/Settings/Settings";
 import Help from "./pages/Help";
+import Detail from "./pages/Quotation/Detail";
 
 
 const getUserData = () =>
@@ -97,6 +98,7 @@ const App = () => {
           {/* <Route path="contacts/:contactId/edit" element={<EditContact />} loader={contactLoader} action={editAction} />
           <Route path="contacts/:contactId/destroy" action={destroyAction} /> */}
           <Route path="/quotations" element={<Quotations />} />
+          <Route path="/quotations/edit" element={<Detail/>}></Route>
           <Route path="/purchase-order" element={<PurchaseOrder />} />
           <Route
             path="/catalogue"

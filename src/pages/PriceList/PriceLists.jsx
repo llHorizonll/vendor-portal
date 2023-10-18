@@ -154,24 +154,28 @@ const PriceLists = () => {
 
   return (
     <>
-      <BoxHeader title={t("pages.pricelist.title")} />
 
-      {matchesSm && (<MaterialReactTable
-        columns={columns}
-        data={data}
-        state={{ isLoading: !data }}
-        muiTableBodyRowProps={({ row }) => ({
-          onClick: () => {
-            navigate(row.original.id.toString());
-            console.log(row);
-          },
-          sx: {
-            cursor: "pointer",
-          },
-        })}
-        enableDensityToggle
-      />
-      )}
+
+      {matchesSm && (
+        <>
+        <BoxHeader title={t("pages.pricelist.title")} />
+        <MaterialReactTable
+          columns={columns}
+          data={data}
+          state={{ isLoading: !data }}
+          muiTableBodyRowProps={({ row }) => ({
+            onClick: () => {
+              navigate(row.original.id.toString());
+              console.log(row);
+            },
+            sx: {
+              cursor: "pointer",
+            },
+          })}
+          enableDensityToggle
+        />
+        </>
+        )}
       {/* <ListCard /> */}
 
       {!matchesSm && (<>
@@ -203,8 +207,7 @@ const PriceLists = () => {
                     Sort:{" "}
                   </Typography>
                   <Chip label="Chip Filled" />
-                  <Chip label="Chip Filled" />
-                  <Chip label="Chip Filled" />
+                
                 </Stack>
 
                 <Button
@@ -275,6 +278,7 @@ const PriceLists = () => {
             </Card>
           </Grid>
         </Grid>
+        <Box mt={"3rem"}></Box>
         <ListCard />
       </>)}
     </>

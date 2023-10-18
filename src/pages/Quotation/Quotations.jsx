@@ -13,7 +13,7 @@ import {
   // TextField,
   // Typography,
   // Button, 
-  Box,
+  Box, Button,
 } from "@mui/material";
 import BoxHeader from "../../components/BoxHeader";
 import { t } from "i18next";
@@ -54,6 +54,7 @@ const Quotations = () => {
   return <>
     <BoxHeader title={t("pages.quotations.title")} />
     <Box>
+       <Button onClick={""}>Test</Button>
       <MaterialReactTable
         columns={columns}
         data={"data"}
